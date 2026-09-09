@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the real cumulative P1/P2/P3 suite against MiniCPM5-2B.
+"""Run the real cumulative P1–P4 suite against MiniCPM5-2B.
 
 The client is deliberately OpenAI-compatible (no MockLLM): start the live
 Lightning/vLLM endpoint first, then run this script from the repository root.
@@ -29,7 +29,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--rung", type=int, default=1)
     parser.add_argument("--suite", type=Path, default=ROOT / "tasks" / "suite_smoke.json")
     parser.add_argument("--ledger", type=Path, default=ROOT / "results" / "ledger.csv")
-    parser.add_argument("--output", type=Path, default=ROOT / "results" / "runs" / "p1_real_minicpm5_fixed.json")
+    parser.add_argument("--output", type=Path, default=ROOT / "results" / "runs" / "p4_real_minicpm5_mini_v1.json")
     parser.add_argument("--model-id", default=os.getenv("MODEL_ID", DEFAULT_MODEL_ID))
     parser.add_argument("--base-url", default=os.getenv("OPENAI_BASE_URL", "http://127.0.0.1:8000/v1"))
     parser.add_argument("--seed", type=int, default=0)
@@ -38,9 +38,9 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    if args.rung not in (1, 2, 3):
-        raise SystemExit("This runner supports cumulative rungs 1-3 (P1-P3).")
-    config = ModelConfig(model_id=args.model_id, base_url=args.base_url, seed=args.seed, max_tokens=64)
+    if args.rung not in (1, 2, 3, 4):
+        raise SystemExit("This runner supports cumulative rungs 1-4 (P1-P4).")
+    config = ModelConfig(model_id=args.model_id, base_url=args.base_url, seed=args.seed, max_tokens=128)
     summary = run_suite(
         rung=args.rung,
         suite_path=args.suite,

@@ -47,6 +47,14 @@ class MockLLM:
                 user_text = m.content
                 break
 
+        # After a tool response, emit the tool payload as the final answer.
+        if user_text.strip().startswith("<tool_response>"):
+            body = re.sub(r"</?tool_response>", "", user_text).strip()
+            return body
+
+        system_blob = "\n".join(m.content for m in messages if m.role == "system")
+        tools_enabled = "# Tools" in system_blob or "<tools>" in system_blob
+
         exact = re.search(r"Reply with exactly:\s*(.+)$", user_text, re.IGNORECASE | re.MULTILINE)
         if exact:
             return exact.group(1).strip()
@@ -66,6 +74,22 @@ class MockLLM:
         code = re.search(r"print\((\d+)\s*\+\s*(\d+)\)", user_text)
         if code:
             return str(int(code.group(1)) + int(code.group(2)))
+
+        if tools_enabled:
+            lower = user_text.lower()
+            if "weather" in lower and "paris" in lower:
+                return '<function name="weather"><param name="city">Paris</param><param name="unit">C</param></function>'
+            calc = re.search(r"calculator\s+(\d+)\s*\+\s*(\d+)", user_text, re.I)
+            if calc:
+                expr = f"{calc.group(1)}+{calc.group(2)}"
+                return f'<function name="calculator"><param name="expression">{expr}</param></function>'
+            if "lookup" in lower or "status" in lower:
+                return '<function name="lookup"><param name="key">status</param></function>'
+            email = re.search(r"([\w.+-]+@[\w.-]+)", user_text)
+            if "email" in lower and email:
+                return f'<function name="email"><param name="recipient">{email.group(1)}</param></function>'
+            if "search" in lower and "count" in lower:
+                return '<function name="search"><param name="count">3</param></function>'
 
         return "OK"
 
@@ -132,18 +156,51 @@ class TransformersLLM:
         return inputs
 
     def complete(self, messages: Sequence[Message]) -> str:
-        prompt = next((m.content for m in reversed(messages) if m.role == "user"), "")
-        inputs = self.clean_generation_inputs(self.tokenizer(prompt, return_tensors="pt"))
+        payload = [{"role": m.role, "content": m.content} for m in messages]
+        try:
+            prompt = self.tokenizer.apply_chat_template(
+                payload,
+                tokenize=False,
+                add_generation_prompt=True,
+                enable_thinking=False,
+            )
+        except TypeError:
+            # Older tokenizers may not accept enable_thinking.
+            prompt = self.tokenizer.apply_chat_template(
+                payload,
+                tokenize=False,
+                add_generation_prompt=True,
+            )
+        inputs = self.clean_generation_inputs(
+            self.tokenizer(prompt, return_tensors="pt")
+        )
         inputs = {k: v.to(self.model.device) for k, v in inputs.items()}
         n_prompt = int(inputs["input_ids"].shape[-1])
         t0 = time.perf_counter()
         with self._torch.inference_mode():
-            output = self.model.generate(**inputs, max_new_tokens=self.max_new_tokens, do_sample=False, pad_token_id=self.tokenizer.eos_token_id)
+            output = self.model.generate(
+                **inputs,
+                max_new_tokens=self.max_new_tokens,
+                do_sample=False,
+                pad_token_id=self.tokenizer.eos_token_id,
+            )
         latency = time.perf_counter() - t0
         seq = output[0]
         ids = inputs["input_ids"][0]
         if seq.shape[-1] >= n_prompt and self._torch.equal(seq[:n_prompt].cpu(), ids.cpu()):
             seq = seq[n_prompt:]
         text = self.tokenizer.decode(seq, skip_special_tokens=True).strip()
-        self.last_metadata = {"prompt_tokens": n_prompt, "output_tokens": int(seq.numel()), "latency_s": latency, "max_new_tokens": self.max_new_tokens, "device": str(self.model.device), "dtype": str(next(self.model.parameters()).dtype)}
+        self.last_metadata = {
+            "prompt_tokens": n_prompt,
+            "output_tokens": int(seq.numel()),
+            "latency_s": latency,
+            "max_new_tokens": self.max_new_tokens,
+            "device": str(self.model.device),
+            "dtype": str(next(self.model.parameters()).dtype),
+        }
+        # Keep raw tool XML for the P4 loop; only strip think markup.
+        if "<function" in text.lower():
+            text = re.sub(r"<think\b[^>]*>.*?</think>", "", text, flags=re.I | re.S)
+            text = re.sub(r"<think\b[^>]*>.*$", "", text, flags=re.I | re.S)
+            return text.strip()
         return clean_completion(text)

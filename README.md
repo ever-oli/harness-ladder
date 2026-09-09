@@ -40,7 +40,7 @@ flags = PowerFlags.for_rung(3)   # P0,P1,P2,P3
 assert enable_up_to(0).is_on("P0")
 ```
 
-Only **P0** changes control flow today. P1–P12 are registered stubs so the eval runner and ledger stay stable as powers land.
+**P0–P4** change control flow today (few-shot, budgeted thinking, retrieval, tools). P5–P12 remain stubs.
 
 ## Ledger
 
@@ -75,3 +75,5 @@ See [CLOUD_PLAN.md](CLOUD_PLAN.md) and [github.com/ever-oli/harness-ladder](http
 | Mini v1 / P3 | 10/24 | 41.7% | **+8.4 pp** | cumulative naive retrieval; results/runs/p3_real_minicpm5_mini_v1.json |
 
 P3 adds top-k lexical passages from the local corpus while retaining P0-P2 behavior.
+
+P4 adds MiniCPM5-style tool definitions + one XML tool-call round (call → observe → answer).

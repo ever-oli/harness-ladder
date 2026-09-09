@@ -1,4 +1,4 @@
-"""Power flags P0–P12. P0 and P1 are implemented; later powers are stubs."""
+"""Power flags P0–P12. P0–P4 are implemented; later powers are stubs."""
 
 from __future__ import annotations
 
@@ -20,16 +20,16 @@ POWER_SPECS: Mapping[str, PowerSpec] = {
     "P0": PowerSpec("P0", "V0 sampling loop", "Single-turn sample → answer", True),
     "P1": PowerSpec("P1", "Few-shot exemplars", "Task-family demonstrations before the query", True),
     "P2": PowerSpec("P2", "Budgeted thinking", "Private fixed-budget reasoning with answer-only output", True),
-    "P3": PowerSpec("P3", "Self-check", "Verify answer before commit", False),
-    "P4": PowerSpec("P4", "Tool schema", "Declare available tools", False),
-    "P5": PowerSpec("P5", "Tool use", "Call tools in the loop", False),
-    "P6": PowerSpec("P6", "Scratchpad", "Explicit working memory", False),
-    "P7": PowerSpec("P7", "Retry / repair", "Retry on failed checks", False),
-    "P8": PowerSpec("P8", "Retrieval hook", "Inject retrieved context", False),
-    "P9": PowerSpec("P9", "File grounding", "Read task-local files", False),
-    "P10": PowerSpec("P10", "Multi-step plan", "Plan then execute", False),
-    "P11": PowerSpec("P11", "Reflection", "Post-hoc critique pass", False),
-    "P12": PowerSpec("P12", "Recursive ask", "Decompose and recurse", False),
+    "P3": PowerSpec("P3", "Retrieval", "Naive lexical RAG over the task corpus", True),
+    "P4": PowerSpec("P4", "Tool definitions + calling", "Declare tools and execute MiniCPM5 XML calls", True),
+    "P5": PowerSpec("P5", "ReAct loop", "Thought → act → observe multi-step", False),
+    "P6": PowerSpec("P6", "Self-refine", "Generate → critique → revise", False),
+    "P7": PowerSpec("P7", "Reflexion", "Verbal reinforcement across trials", False),
+    "P8": PowerSpec("P8", "Persistent Python REPL", "Stateful code execution tool", False),
+    "P9": PowerSpec("P9", "Sub-agents", "Spawn scoped child agents", False),
+    "P10": PowerSpec("P10", "Verified skills", "Pre-tested tool/skill library", False),
+    "P11": PowerSpec("P11", "Memory CRUD", "Persistent memory across tasks", False),
+    "P12": PowerSpec("P12", "Recursive ask", "Decompose over large files", False),
 }
 
 
