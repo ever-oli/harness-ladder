@@ -40,7 +40,7 @@ flags = PowerFlags.for_rung(3)   # P0,P1,P2,P3
 assert enable_up_to(0).is_on("P0")
 ```
 
-**P0–P7** change control flow today (few-shot, budgeted thinking, retrieval, tools). P5–P12 remain stubs.
+**P0–P8** change control flow today (few-shot, budgeted thinking, retrieval, tools). P5–P12 remain stubs.
 
 ## Ledger
 
@@ -87,3 +87,5 @@ P5 adds a ReAct loop (Thought → tool act → observe, up to 3 rounds) on top o
 P6 adds self-refine (critique → compact revise) to cut verbose exact-match failures. Chart: 8.3→16.7→33.3→41.7→62.5→62.5→70.8→**70.8**.
 
 P7 adds Reflexion (verbal critique → one retry trial). Flat on mini suite vs P6 (same 70.8%) — retry helps less without external feedback.
+
+P8 adds a persistent restricted Python REPL tool for executable code/math steps.

@@ -1,4 +1,4 @@
-"""P0 — V0 sampling loop with cumulative P1–P7 harness powers."""
+"""P0 — V0 sampling loop with cumulative P1–P8 harness powers."""
 
 from __future__ import annotations
 
@@ -13,10 +13,12 @@ from harness_ladder.model import LLMClient, MockLLM
 from harness_ladder.fewshot import pack_few_shot_messages
 from harness_ladder.retriever import render_context, retrieve_from_path
 from harness_ladder.powers import apply_power_hooks
+from harness_ladder.repl import PersistentPythonREPL
 from harness_ladder.tools import (
     execute_tool_call,
     format_tool_response,
     infer_tool_hint,
+    make_python_repl_tool,
     parse_tool_calls,
     render_tool_definitions,
     tool_registry,
@@ -93,12 +95,13 @@ def run_v0_loop(
     tags: Iterable[str] | None = None,
     max_tool_rounds: int | None = None,
 ) -> Trajectory:
-    """Execute the sampling loop with cumulative P0–P7 powers.
+    """Execute the sampling loop with cumulative P0–P8 powers.
 
     P4: tool definitions + one call round.
     P5: ReAct multi-step thought → act → observe (default up to 3 tool rounds).
     P6: self-refine (critique → compact revise) after the draft answer.
     P7: Reflexion — verbal critique, then one retry trial with that memory.
+    P8: persistent Python REPL tool (stateful across tool rounds).
     """
     config = config or ModelConfig()
     flags = flags or PowerFlags.for_rung(0)
@@ -122,21 +125,28 @@ def run_v0_loop(
         context = render_context(retrieve_from_path(prompt, corpus, top_k=3))
         if context:
             messages.append(Message(role="system", content=context))
+    repl = PersistentPythonREPL() if flags.is_on("P8") else None
+    extra_tools = (make_python_repl_tool(repl),) if repl is not None else None
     if flags.is_on("P4"):
-        tool_msg = render_tool_definitions()
-        hint = infer_tool_hint(prompt)
+        tool_msg = render_tool_definitions(extra=extra_tools)
+        hint = infer_tool_hint(prompt, python_repl=flags.is_on("P8"))
         if hint:
             tool_msg = tool_msg + "\n\n" + hint
+        if flags.is_on("P8"):
+            tool_msg += (
+                "\n\nP8: python_repl is persistent within this task. "
+                "Use it for code execution; Final Answer with the printed/returned value only."
+            )
         messages.append(Message(role="system", content=tool_msg))
 
     messages.append(Message(role="user", content=prompt))
 
     t0 = time.perf_counter()
     answer = ""
-    registry = tool_registry() if flags.is_on("P4") else {}
+    registry = tool_registry(extra=extra_tools) if flags.is_on("P4") else {}
     if max_tool_rounds is None:
-        if flags.is_on("P5"):
-            rounds = 3
+        if flags.is_on("P8") or flags.is_on("P5"):
+            rounds = 4 if flags.is_on("P8") else 3
         elif flags.is_on("P4"):
             rounds = 1
         else:

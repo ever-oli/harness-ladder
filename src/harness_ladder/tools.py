@@ -169,14 +169,48 @@ DEFAULT_TOOLS: tuple[ToolSpec, ...] = (
 )
 
 
-def tool_registry(tools: tuple[ToolSpec, ...] | None = None) -> dict[str, ToolSpec]:
-    specs = tools or DEFAULT_TOOLS
+def make_python_repl_tool(repl) -> ToolSpec:
+    """Bind a PersistentPythonREPL instance into a ToolSpec handler."""
+
+    def _handler(args: Mapping[str, str]) -> str:
+        code = args.get("code") or args.get("source") or args.get("expression") or ""
+        return repl.run(code)
+
+    return ToolSpec(
+        name="python_repl",
+        description=(
+            "Execute Python in a persistent REPL. State survives across calls. "
+            "Use print(...) or a final expression; prefer for code/math multi-step."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {"code": {"type": "string"}},
+            "required": ["code"],
+        },
+        handler=_handler,
+    )
+
+
+def tool_registry(
+    tools: tuple[ToolSpec, ...] | None = None,
+    *,
+    extra: tuple[ToolSpec, ...] | None = None,
+) -> dict[str, ToolSpec]:
+    specs = list(tools or DEFAULT_TOOLS)
+    if extra:
+        specs.extend(extra)
     return {spec.name: spec for spec in specs}
 
 
-def render_tool_definitions(tools: tuple[ToolSpec, ...] | None = None) -> str:
+def render_tool_definitions(
+    tools: tuple[ToolSpec, ...] | None = None,
+    *,
+    extra: tuple[ToolSpec, ...] | None = None,
+) -> str:
     """Render MiniCPM5-style tool instructions for the system prompt."""
-    specs = tools or DEFAULT_TOOLS
+    specs = list(tools or DEFAULT_TOOLS)
+    if extra:
+        specs.extend(extra)
     lines = [
         "# Tools",
         "",
@@ -200,7 +234,7 @@ def render_tool_definitions(tools: tuple[ToolSpec, ...] | None = None) -> str:
 
 
 _LOOSE_FUNCTION_RE = re.compile(
-    r'(?:<function\s+)?name="(?P<name>weather|calculator|lookup|email|search)"\s*>'
+    r'(?:<function\s+)?name="(?P<name>weather|calculator|lookup|email|search|python_repl)"\s*>'
     r'(?P<body>.*?)(?:</function>|$)',
     re.IGNORECASE | re.DOTALL,
 )
@@ -256,9 +290,25 @@ def format_tool_response(result: str) -> str:
     return f"<tool_response>\n{result}\n</tool_response>"
 
 
-def infer_tool_hint(prompt: str) -> str | None:
+def infer_tool_hint(prompt: str, *, python_repl: bool = False) -> str | None:
     """Optional soft hint for tiny models when the task clearly names a tool."""
     lower = prompt.lower()
+    if python_repl and any(
+        k in lower
+        for k in (
+            "sorted(",
+            "range(",
+            "len(",
+            ".upper(",
+            "print",
+            "add(",
+            "packs",
+            "double",
+            "start ",
+            "visit ",
+        )
+    ):
+        return "Prefer the python_repl tool for code/math steps; state persists across calls."
     if "weather" in lower:
         return "Prefer the weather tool."
     if "calculator" in lower or re.search(r"\d+\s*[+\-*/]\s*\d+", prompt):

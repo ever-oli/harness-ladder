@@ -103,6 +103,27 @@ class MockLLM:
             lower = user_text.lower()
             system_blob = "\n".join(m.content for m in messages if m.role == "system")
             react = "P5 ReAct" in system_blob
+            if "python_repl" in system_blob.lower() and any(
+                k in lower for k in ("sorted(", "range(", "len(", ".upper(", "start ", "packs", "add 10")
+            ):
+                # Emit a single REPL snippet that solves common suite prompts.
+                if "sorted(" in lower:
+                    code = "sorted([3,1,2])"
+                elif "range(1,4)" in lower or "range(1, 4)" in lower:
+                    code = "print(*range(1,4))"
+                elif ".upper(" in lower:
+                    code = "'harness'.upper()"
+                elif "len(" in lower:
+                    code = "len({'a':1,'b':2})"
+                elif "start 5" in lower:
+                    code = "x=5\nx=x*2\nx=x+3\nx=x-4\nx"
+                elif "2 packs of 6" in lower:
+                    code = "x=2*6\nx=x-3\nx"
+                elif "add 10 to 1,2,3,4" in lower:
+                    code = "[1+10,2+10,3+10,4+10][-1]"
+                else:
+                    code = "print(7+5)"
+                return f'<function name="python_repl"><param name="code">{code}</param></function>'
             if "weather" in lower and "paris" in lower:
                 return '<function name="weather"><param name="city">Paris</param><param name="unit">C</param></function>'
             calc = re.search(r"calculator\s+(\d+)\s*\+\s*(\d+)", user_text, re.I)
