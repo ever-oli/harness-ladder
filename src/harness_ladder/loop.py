@@ -1,4 +1,4 @@
-"""P0 — V0 sampling loop with cumulative P1–P5 harness powers."""
+"""P0 — V0 sampling loop with cumulative P1–P6 harness powers."""
 
 from __future__ import annotations
 
@@ -21,6 +21,7 @@ from harness_ladder.tools import (
     render_tool_definitions,
     tool_registry,
 )
+from harness_ladder.refine import self_refine
 from harness_ladder.types import Message, Trajectory
 
 _P2_PROTOCOL = (
@@ -91,10 +92,11 @@ def run_v0_loop(
     tags: Iterable[str] | None = None,
     max_tool_rounds: int | None = None,
 ) -> Trajectory:
-    """Execute the sampling loop with cumulative P0–P5 powers.
+    """Execute the sampling loop with cumulative P0–P6 powers.
 
     P4: tool definitions + one call round.
     P5: ReAct multi-step thought → act → observe (default up to 3 tool rounds).
+    P6: self-refine (critique → compact revise) after the draft answer.
     """
     config = config or ModelConfig()
     flags = flags or PowerFlags.for_rung(0)
@@ -167,6 +169,11 @@ def run_v0_loop(
         answer = messages[-1].content if messages else ""
 
     answer = _finalize_answer(answer, flags)
+    if flags.is_on("P6"):
+        refined = self_refine(client, prompt, answer)
+        if refined != answer:
+            messages.append(Message(role="assistant", content=f"P6_REFINED: {refined}"))
+        answer = refined
     elapsed = time.perf_counter() - t0
 
     return Trajectory(

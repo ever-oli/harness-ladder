@@ -1,4 +1,4 @@
-"""Power flags P0–P12. P0–P5 are implemented; later powers are stubs."""
+"""Power flags P0–P12. P0–P6 are implemented; later powers are stubs."""
 
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ POWER_SPECS: Mapping[str, PowerSpec] = {
     "P3": PowerSpec("P3", "Retrieval", "Naive lexical RAG over the task corpus", True),
     "P4": PowerSpec("P4", "Tool definitions + calling", "Declare tools and execute MiniCPM5 XML calls", True),
     "P5": PowerSpec("P5", "ReAct loop", "Thought → act → observe multi-step", True),
-    "P6": PowerSpec("P6", "Self-refine", "Generate → critique → revise", False),
+    "P6": PowerSpec("P6", "Self-refine", "Generate → critique → revise", True),
     "P7": PowerSpec("P7", "Reflexion", "Verbal reinforcement across trials", False),
     "P8": PowerSpec("P8", "Persistent Python REPL", "Stateful code execution tool", False),
     "P9": PowerSpec("P9", "Sub-agents", "Spawn scoped child agents", False),

@@ -61,6 +61,14 @@ class MockLLM:
         system_blob = "\n".join(m.content for m in messages if m.role == "system")
         tools_enabled = "# Tools" in system_blob or "<tools>" in system_blob
 
+        if "P6_SELF_REFINE" in user_text:
+            draft_m = re.search(r"Draft:\s*(.+?)\nRevised:", user_text, re.S)
+            question_m = re.search(r"Question:\s*(.+?)\nDraft:", user_text, re.S)
+            draft = (draft_m.group(1).strip() if draft_m else user_text)
+            question = question_m.group(1).strip() if question_m else ""
+            from harness_ladder.refine import normalize_compact
+            return normalize_compact(draft, prompt=question)
+
         exact = re.search(r"Reply with exactly:\s*(.+)$", user_text, re.IGNORECASE | re.MULTILINE)
         if exact:
             return exact.group(1).strip()

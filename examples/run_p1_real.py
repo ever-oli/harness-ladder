@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the real cumulative P1–P5 suite against MiniCPM5-2B.
+"""Run the real cumulative P1–P6 suite against MiniCPM5-2B.
 
 The client is deliberately OpenAI-compatible (no MockLLM): start the live
 Lightning/vLLM endpoint first, then run this script from the repository root.
@@ -38,8 +38,8 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    if args.rung not in (1, 2, 3, 4, 5):
-        raise SystemExit("This runner supports cumulative rungs 1-5 (P1-P5).")
+    if args.rung not in (1, 2, 3, 4, 5, 6):
+        raise SystemExit("This runner supports cumulative rungs 1-6 (P1-P6).")
     config = ModelConfig(model_id=args.model_id, base_url=args.base_url, seed=args.seed, max_tokens=128)
     summary = run_suite(
         rung=args.rung,
