@@ -1,0 +1,1125 @@
+{
+  "rung": 4,
+  "powers": "P0,P1,P2,P3,P4",
+  "model_id": "openbmb/MiniCPM5-2B",
+  "seed": 0,
+  "suite": "tasks/suite_v1_mini.json",
+  "n_tasks": 24,
+  "n_success": 15,
+  "success_rate": 0.625,
+  "avg_tokens": 2.375,
+  "avg_wall_time_s": 0.5844135173344208,
+  "total_wall_time_s": 14.0259244160261,
+  "results": [
+    {
+      "task_id": "v1_code_01",
+      "success": true,
+      "expected": "[1, 2, 3]",
+      "actual": "[1, 2, 3]",
+      "tokens_used": 3,
+      "wall_time_s": 1.1148487710015615,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Evaluate print(2 + 3). Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "sorted([3,1,2])? list only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "[1, 2, 3]",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_code_02",
+      "success": false,
+      "expected": "12",
+      "actual": "name=\"calculator\"> name=\"expression\">7 + 5",
+      "tokens_used": 4,
+      "wall_time_s": 0.938448298998992,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Evaluate print(2 + 3). Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "add(7,5) where add returns a+b? number",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "name=\"calculator\"> name=\"expression\">7 + 5",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_code_03",
+      "success": true,
+      "expected": "HARNESS",
+      "actual": "HARNESS",
+      "tokens_used": 1,
+      "wall_time_s": 0.2618383249937324,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Evaluate print(2 + 3). Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "'harness'.upper()? string only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "HARNESS",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_code_04",
+      "success": true,
+      "expected": "1 2 3",
+      "actual": "1 2 3",
+      "tokens_used": 3,
+      "wall_time_s": 0.3955729529989185,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Evaluate print(2 + 3). Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "range(1,4) prints which numbers? space-separated",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "1 2 3",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_code_05",
+      "success": true,
+      "expected": "2",
+      "actual": "2",
+      "tokens_used": 1,
+      "wall_time_s": 0.22007173499150667,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Evaluate print(2 + 3). Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "len({'a':1,'b':2})? number",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "2",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_math_01",
+      "success": true,
+      "expected": "12",
+      "actual": "12",
+      "tokens_used": 1,
+      "wall_time_s": 0.21711519299424253,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Calculate 3 + 4. Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "7",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "7 red + 5 blue balls?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "12",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_math_02",
+      "success": true,
+      "expected": "33",
+      "actual": "33",
+      "tokens_used": 1,
+      "wall_time_s": 0.20912799700454343,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Calculate 3 + 4. Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "7",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "$40 minus $7?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "33",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_math_03",
+      "success": false,
+      "expected": "48",
+      "actual": "8 pages for 6 days is approximately 1.33 pages per day.",
+      "tokens_used": 11,
+      "wall_time_s": 0.9207785129983677,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Calculate 3 + 4. Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "7",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "8 pages for 6 days?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "8 pages for 6 days is approximately 1.33 pages per day.",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_math_04",
+      "success": true,
+      "expected": "30",
+      "actual": "30",
+      "tokens_used": 1,
+      "wall_time_s": 0.212859772000229,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Calculate 3 + 4. Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "7",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "60 km in 2 hours speed?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "30",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_math_05",
+      "success": true,
+      "expected": "4",
+      "actual": "4",
+      "tokens_used": 1,
+      "wall_time_s": 0.2143360850022873,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Calculate 3 + 4. Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "7",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "24 apples / 6 children?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "4",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_tool_01",
+      "success": false,
+      "expected": "{\"city\":\"Paris\",\"unit\":\"C\"}",
+      "actual": "name=\"weather\"> name=\"city\">Paris name=\"unit\">C",
+      "tokens_used": 3,
+      "wall_time_s": 1.094774071010761,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "A tool completed successfully. Give only the status word READY.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "READY",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Private local reference passages. Use them to answer the user's request;\ndo not mention this retrieval step, repeat headers, or reveal scratch work.\n[repo/CHANGELOG.md]\n## 1.4.2\nThe 1.4.2 release adds deterministic request packing and a safer timeout default.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).\n\nPrefer the weather tool.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "weather request city Paris unit C, compact JSON",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "name=\"weather\"> name=\"city\">Paris name=\"unit\">C",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_tool_02",
+      "success": true,
+      "expected": "42",
+      "actual": "42",
+      "tokens_used": 1,
+      "wall_time_s": 0.2224912259989651,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "A tool completed successfully. Give only the status word READY.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "READY",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).\n\nPrefer the calculator tool when arithmetic is required.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "calculator 19 + 23 final number",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "42",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_tool_03",
+      "success": true,
+      "expected": "ready",
+      "actual": "name=\"lookup\"> name=\"key\">status ready",
+      "tokens_used": 3,
+      "wall_time_s": 0.8448558189993491,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "A tool completed successfully. Give only the status word READY.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "READY",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).\n\nPrefer the lookup tool.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "lookup status ready, JSON status",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "name=\"lookup\"> name=\"key\">status ready",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_tool_04",
+      "success": true,
+      "expected": "ops@example.com",
+      "actual": "ops@example.com",
+      "tokens_used": 1,
+      "wall_time_s": 0.3061507359961979,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "A tool completed successfully. Give only the status word READY.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "READY",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).\n\nPrefer the email tool.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "email recipient ops@example.com, output recipient",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "ops@example.com",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_tool_05",
+      "success": false,
+      "expected": "count\\\\s*[:=]\\\\s*3",
+      "actual": "3",
+      "tokens_used": 1,
+      "wall_time_s": 0.21970060899911914,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "A tool completed successfully. Give only the status word READY.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "READY",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).\n\nPrefer the search tool.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "search found 3, JSON count 3",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "3",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_file_01",
+      "success": true,
+      "expected": "8088",
+      "actual": "8088",
+      "tokens_used": 1,
+      "wall_time_s": 0.27807529701385647,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "The file check result is FILE_OK. Give only that status word.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "FILE_OK",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Private local reference passages. Use them to answer the user's request;\ndo not mention this retrieval step, repeat headers, or reveal scratch work.\n[repo/config.toml]\n[server]\nport = 8088\nhost = \"127.0.0.1\"",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "config.toml port=8088, what port?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "8088",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_file_02",
+      "success": true,
+      "expected": "3",
+      "actual": "3",
+      "tokens_used": 1,
+      "wall_time_s": 0.23352724700816907,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "The file check result is FILE_OK. Give only that status word.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "FILE_OK",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Private local reference passages. Use them to answer the user's request;\ndo not mention this retrieval step, repeat headers, or reveal scratch work.\n[repo/README.md]\nThe worker retries failed jobs 3 times before marking a job failed.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "README worker retries 3, how many?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "3",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_file_03",
+      "success": false,
+      "expected": "Ever",
+      "actual": "name=\"lookup\"> name=\"key\">owner",
+      "tokens_used": 2,
+      "wall_time_s": 0.8148668880021432,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "The file check result is FILE_OK. Give only that status word.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "FILE_OK",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Private local reference passages. Use them to answer the user's request;\ndo not mention this retrieval step, repeat headers, or reveal scratch work.\n[repo/owners.txt]\nowner = Ever Olivares\nteam = vision-model",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "owners.txt owner Ever, name?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "name=\"lookup\"> name=\"key\">owner",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_file_04",
+      "success": true,
+      "expected": "1.4.2",
+      "actual": "1.4.2",
+      "tokens_used": 1,
+      "wall_time_s": 0.497109913994791,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "The file check result is FILE_OK. Give only that status word.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "FILE_OK",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Private local reference passages. Use them to answer the user's request;\ndo not mention this retrieval step, repeat headers, or reveal scratch work.\n[repo/CHANGELOG.md]\n## 1.4.2\nThe 1.4.2 release adds deterministic request packing and a safer timeout default.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "changelog version 1.4.2, version?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "1.4.2",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_file_05",
+      "success": true,
+      "expected": "900",
+      "actual": "900",
+      "tokens_used": 1,
+      "wall_time_s": 0.2552471050003078,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "The file check result is FILE_OK. Give only that status word.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "FILE_OK",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Private local reference passages. Use them to answer the user's request;\ndo not mention this retrieval step, repeat headers, or reveal scratch work.\n[repo/cache.toml]\nDEFAULT_TTL = 900\nThe cache TTL is measured in seconds.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "cache DEFAULT_TTL=900, value?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "900",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_long_horizon_01",
+      "success": false,
+      "expected": "9",
+      "actual": "Final result: 9.",
+      "tokens_used": 3,
+      "wall_time_s": 3.111136355000781,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "The requested operation is complete. Give only the status word DONE.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "DONE",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "start 5, double, add 3, subtract 4, final?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Final result: 9.",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_long_horizon_02",
+      "success": false,
+      "expected": "9",
+      "actual": "2 * 6 = 12. 12 - 3 = 9.",
+      "tokens_used": 10,
+      "wall_time_s": 0.9319272650027415,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "The requested operation is complete. Give only the status word DONE.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "DONE",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "2 packs of 6, use 3, remain?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "2 * 6 = 12. 12 - 3 = 9.",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_long_horizon_03",
+      "success": false,
+      "expected": "14",
+      "actual": "15",
+      "tokens_used": 1,
+      "wall_time_s": 0.22456716500164475,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "The requested operation is complete. Give only the status word DONE.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "DONE",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "add 10 to 1,2,3,4, last result?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "15",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_long_horizon_04",
+      "success": false,
+      "expected": "C",
+      "actual": "DONE",
+      "tokens_used": 1,
+      "wall_time_s": 0.28649707601289265,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P2: reason silently for at most 32 internal tokens; emit only the final answer. Never output scratch work, chain-of-thought, or <think> tags.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "The requested operation is complete. Give only the status word DONE.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "DONE",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "visit A then B then C, last?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "DONE",
+          "name": null
+        }
+      ]
+    }
+  ]
+}
