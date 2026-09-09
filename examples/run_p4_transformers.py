@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run cumulative P4–P6 (or any rung) against local Transformers MiniCPM5-2B."""
+"""Run cumulative P4–P7 (or any rung) against local Transformers MiniCPM5-2B."""
 
 from __future__ import annotations
 
@@ -21,10 +21,10 @@ from harness_ladder.model import TransformersLLM
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--rung", type=int, default=6)
+    parser.add_argument("--rung", type=int, default=7)
     parser.add_argument("--suite", type=Path, default=ROOT / "tasks" / "suite_v1_mini.json")
     parser.add_argument("--ledger", type=Path, default=ROOT / "results" / "ledger.csv")
-    parser.add_argument("--output", type=Path, default=ROOT / "results" / "runs" / "p6_real_minicpm5_mini_v1.json")
+    parser.add_argument("--output", type=Path, default=ROOT / "results" / "runs" / "p7_real_minicpm5_mini_v1.json")
     parser.add_argument("--model-id", default=DEFAULT_MODEL_ID)
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--max-new-tokens", type=int, default=128)

@@ -1,4 +1,4 @@
-"""P0 — V0 sampling loop with cumulative P1–P6 harness powers."""
+"""P0 — V0 sampling loop with cumulative P1–P7 harness powers."""
 
 from __future__ import annotations
 
@@ -22,6 +22,7 @@ from harness_ladder.tools import (
     tool_registry,
 )
 from harness_ladder.refine import self_refine
+from harness_ladder.reflexion import reflect, retry_with_reflection
 from harness_ladder.types import Message, Trajectory
 
 _P2_PROTOCOL = (
@@ -92,11 +93,12 @@ def run_v0_loop(
     tags: Iterable[str] | None = None,
     max_tool_rounds: int | None = None,
 ) -> Trajectory:
-    """Execute the sampling loop with cumulative P0–P6 powers.
+    """Execute the sampling loop with cumulative P0–P7 powers.
 
     P4: tool definitions + one call round.
     P5: ReAct multi-step thought → act → observe (default up to 3 tool rounds).
     P6: self-refine (critique → compact revise) after the draft answer.
+    P7: Reflexion — verbal critique, then one retry trial with that memory.
     """
     config = config or ModelConfig()
     flags = flags or PowerFlags.for_rung(0)
@@ -174,6 +176,17 @@ def run_v0_loop(
         if refined != answer:
             messages.append(Message(role="assistant", content=f"P6_REFINED: {refined}"))
         answer = refined
+    if flags.is_on("P7"):
+        reflection = reflect(client, prompt, answer)
+        messages.append(Message(role="assistant", content=f"P7_REFLECTION: {reflection}"))
+        retried = retry_with_reflection(client, prompt, answer, reflection)
+        retried = _finalize_answer(retried, flags)
+        if flags.is_on("P6"):
+            retried = self_refine(client, prompt, retried)
+        messages.append(Message(role="assistant", content=f"P7_RETRY: {retried}"))
+        # Prefer retry when non-empty; Reflexion is a second trial.
+        if retried:
+            answer = retried
     elapsed = time.perf_counter() - t0
 
     return Trajectory(

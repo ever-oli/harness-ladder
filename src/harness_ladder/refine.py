@@ -44,11 +44,18 @@ def normalize_compact(draft: str, *, prompt: str = "") -> str:
         if versions:
             return versions[-1]
 
+    # Keep space-separated multi-number answers (e.g. range prints).
+    lower_p = prompt.lower()
+    if "space-separated" in lower_p or "range(" in lower_p or "which numbers" in lower_p:
+        nums = _INT_RE.findall(text)
+        if len(nums) >= 2:
+            return " ".join(nums)
+
     # Numeric asks: keep the first plausible number token (drop units).
-    if any(k in prompt.lower() for k in ("speed", "how many", "retries", "port", "ttl", "final?", "number")):
+    if any(k in lower_p for k in ("speed", "how many", "retries", "port", "ttl", "final?", "number")):
         nums = _INT_RE.findall(text)
         if nums and len(text.split()) > 1:
-            return nums[0] if "version" not in prompt.lower() else text
+            return nums[0] if "version" not in lower_p else text
 
     # Search count phrasing → compact JSON-ish form graders accept via regex.
     if "search" in prompt.lower() and "count" in prompt.lower():
