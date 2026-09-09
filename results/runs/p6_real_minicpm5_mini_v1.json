@@ -5,11 +5,11 @@
   "seed": 0,
   "suite": "tasks/suite_v1_mini.json",
   "n_tasks": 24,
-  "n_success": 17,
-  "success_rate": 0.7083333333333334,
-  "avg_tokens": 1.2916666666666667,
-  "avg_wall_time_s": 1.5422301651663777,
-  "total_wall_time_s": 37.013523963993066,
+  "n_success": 19,
+  "success_rate": 0.7916666666666666,
+  "avg_tokens": 1.375,
+  "avg_wall_time_s": 1.4990968962489812,
+  "total_wall_time_s": 35.97832550997555,
   "results": [
     {
       "task_id": "v1_code_01",
@@ -17,7 +17,7 @@
       "expected": "[1, 2, 3]",
       "actual": "[1, 2, 3]",
       "tokens_used": 3,
-      "wall_time_s": 1.118790122010978,
+      "wall_time_s": 1.0847892660094658,
       "messages": [
         {
           "role": "system",
@@ -62,7 +62,7 @@
       "expected": "12",
       "actual": "12",
       "tokens_used": 1,
-      "wall_time_s": 1.4188059139996767,
+      "wall_time_s": 1.3844511239876738,
       "messages": [
         {
           "role": "system",
@@ -117,7 +117,7 @@
       "expected": "HARNESS",
       "actual": "HARNESS",
       "tokens_used": 1,
-      "wall_time_s": 0.286680928998976,
+      "wall_time_s": 0.28266280399111565,
       "messages": [
         {
           "role": "system",
@@ -158,11 +158,11 @@
     },
     {
       "task_id": "v1_code_04",
-      "success": false,
+      "success": true,
       "expected": "1 2 3",
-      "actual": "1",
-      "tokens_used": 1,
-      "wall_time_s": 0.7658138039987534,
+      "actual": "1 2 3",
+      "tokens_used": 3,
+      "wall_time_s": 0.41861483799584676,
       "messages": [
         {
           "role": "system",
@@ -198,11 +198,6 @@
           "role": "assistant",
           "content": "1 2 3",
           "name": null
-        },
-        {
-          "role": "assistant",
-          "content": "P6_REFINED: 1",
-          "name": null
         }
       ]
     },
@@ -212,7 +207,7 @@
       "expected": "2",
       "actual": "2",
       "tokens_used": 1,
-      "wall_time_s": 0.2549660039949231,
+      "wall_time_s": 0.23689748300239444,
       "messages": [
         {
           "role": "system",
@@ -257,7 +252,7 @@
       "expected": "12",
       "actual": "12",
       "tokens_used": 1,
-      "wall_time_s": 0.23820714199973736,
+      "wall_time_s": 0.23520564900536556,
       "messages": [
         {
           "role": "system",
@@ -302,7 +297,7 @@
       "expected": "33",
       "actual": "33",
       "tokens_used": 1,
-      "wall_time_s": 0.2377971819951199,
+      "wall_time_s": 0.234947444012505,
       "messages": [
         {
           "role": "system",
@@ -347,7 +342,7 @@
       "expected": "48",
       "actual": "8 pages for 6 days",
       "tokens_used": 5,
-      "wall_time_s": 4.0647967039985815,
+      "wall_time_s": 4.176500479996321,
       "messages": [
         {
           "role": "system",
@@ -397,7 +392,7 @@
       "expected": "30",
       "actual": "30",
       "tokens_used": 1,
-      "wall_time_s": 0.8335753460123669,
+      "wall_time_s": 0.6692068419943098,
       "messages": [
         {
           "role": "system",
@@ -447,7 +442,7 @@
       "expected": "4",
       "actual": "4",
       "tokens_used": 1,
-      "wall_time_s": 0.2406128849979723,
+      "wall_time_s": 0.2356450889928965,
       "messages": [
         {
           "role": "system",
@@ -492,7 +487,7 @@
       "expected": "{\"city\":\"Paris\",\"unit\":\"C\"}",
       "actual": "{\"city\":\"Paris\",\"unit\":\"C\"}",
       "tokens_used": 1,
-      "wall_time_s": 2.0030831369949738,
+      "wall_time_s": 2.035770649003098,
       "messages": [
         {
           "role": "system",
@@ -552,7 +547,7 @@
       "expected": "42",
       "actual": "42",
       "tokens_used": 1,
-      "wall_time_s": 1.4194407370086992,
+      "wall_time_s": 1.4054021900083171,
       "messages": [
         {
           "role": "system",
@@ -607,7 +602,7 @@
       "expected": "ready",
       "actual": "ready",
       "tokens_used": 1,
-      "wall_time_s": 2.1967768220056314,
+      "wall_time_s": 2.136566547007533,
       "messages": [
         {
           "role": "system",
@@ -662,7 +657,7 @@
       "expected": "ops@example.com",
       "actual": "ops@example.com",
       "tokens_used": 1,
-      "wall_time_s": 4.959104277993902,
+      "wall_time_s": 4.744535922000068,
       "messages": [
         {
           "role": "system",
@@ -733,11 +728,11 @@
     },
     {
       "task_id": "v1_tool_05",
-      "success": false,
-      "expected": "count\\\\s*[:=]\\\\s*3",
+      "success": true,
+      "expected": "count\\s*[:=]\\s*3",
       "actual": "count: 3",
       "tokens_used": 2,
-      "wall_time_s": 0.7646008820011048,
+      "wall_time_s": 0.7648169229942141,
       "messages": [
         {
           "role": "system",
@@ -787,7 +782,7 @@
       "expected": "8088",
       "actual": "8088",
       "tokens_used": 1,
-      "wall_time_s": 0.3336332719918573,
+      "wall_time_s": 0.3302557610004442,
       "messages": [
         {
           "role": "system",
@@ -837,7 +832,7 @@
       "expected": "3",
       "actual": "3",
       "tokens_used": 1,
-      "wall_time_s": 1.038549024000531,
+      "wall_time_s": 1.018762040999718,
       "messages": [
         {
           "role": "system",
@@ -892,7 +887,7 @@
       "expected": "Ever",
       "actual": "unknown",
       "tokens_used": 1,
-      "wall_time_s": 4.210406443991815,
+      "wall_time_s": 4.156521934986813,
       "messages": [
         {
           "role": "system",
@@ -972,7 +967,7 @@
       "expected": "1.4.2",
       "actual": "1.4.2",
       "tokens_used": 1,
-      "wall_time_s": 1.3190260569972452,
+      "wall_time_s": 1.2924283269967418,
       "messages": [
         {
           "role": "system",
@@ -1027,7 +1022,7 @@
       "expected": "900",
       "actual": "900",
       "tokens_used": 1,
-      "wall_time_s": 0.2848104879958555,
+      "wall_time_s": 0.2848091649939306,
       "messages": [
         {
           "role": "system",
@@ -1077,7 +1072,7 @@
       "expected": "9",
       "actual": "9",
       "tokens_used": 1,
-      "wall_time_s": 3.1539668400073424,
+      "wall_time_s": 2.9627906550012995,
       "messages": [
         {
           "role": "system",
@@ -1132,7 +1127,7 @@
       "expected": "9",
       "actual": "3",
       "tokens_used": 1,
-      "wall_time_s": 0.4318730439990759,
+      "wall_time_s": 0.42270639799244236,
       "messages": [
         {
           "role": "system",
@@ -1177,7 +1172,7 @@
       "expected": "14",
       "actual": "11",
       "tokens_used": 1,
-      "wall_time_s": 5.149048927996773,
+      "wall_time_s": 5.175711931995465,
       "messages": [
         {
           "role": "system",
@@ -1232,7 +1227,7 @@
       "expected": "C",
       "actual": "DONE",
       "tokens_used": 1,
-      "wall_time_s": 0.2891579790011747,
+      "wall_time_s": 0.28832604600756895,
       "messages": [
         {
           "role": "system",
