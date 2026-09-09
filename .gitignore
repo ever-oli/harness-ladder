@@ -37,3 +37,4 @@ results/traces/
 .hf_cache/
 models/
 .venv/
+harness-ladder-sync.tar.gz
