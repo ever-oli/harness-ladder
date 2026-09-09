@@ -75,14 +75,15 @@ See [CLOUD_PLAN.md](CLOUD_PLAN.md) and [github.com/ever-oli/harness-ladder](http
 | Mini v1 / P3 | 10/24 | 41.7% | +8.4 pp | cumulative naive retrieval; results/runs/p3_real_minicpm5_mini_v1.json |
 | Mini v1 / P4 | 15/24 | 62.5% | +20.8 pp | cumulative tools (MiniCPM XML); results/runs/p4_real_minicpm5_mini_v1.json |
 | Mini v1 / P5 | 15/24 | 62.5% | +0.0 pp | cumulative ReAct; results/runs/p5_real_minicpm5_mini_v1.json |
-| Mini v1 / P6 | 17/24 | 70.8% | **+8.3 pp** | cumulative self-refine; results/runs/p6_real_minicpm5_mini_v1.json |
+| Mini v1 / P6 | 17/24 | 70.8% | +8.3 pp | cumulative self-refine; results/runs/p6_real_minicpm5_mini_v1.json |
+| Mini v1 / P7 | 17/24 | 70.8% | **+0.0 pp** | cumulative Reflexion; results/runs/p7_real_minicpm5_mini_v1.json |
 
 P3 adds top-k lexical passages from the local corpus while retaining P0-P2 behavior.
 
-P4 adds MiniCPM5-style tool definitions + one XML tool-call round (call → observe → answer). Chart: 8.3→16.7→33.3→41.7→62.5→62.5→**70.8**.
+P4 adds MiniCPM5-style tool definitions + one XML tool-call round (call → observe → answer). Chart: 8.3→16.7→33.3→41.7→62.5→62.5→70.8→**70.8**.
 
 P5 adds a ReAct loop (Thought → tool act → observe, up to 3 rounds) on top of P4 tools. P5 ReAct traded wins: recovered code/tool/long-horizon XML cases, but some exact-match file/math answers became verbose sentences (net flat).
 
-P6 adds self-refine (critique → compact revise) to cut verbose exact-match failures. Chart: 8.3→16.7→33.3→41.7→62.5→62.5→**70.8**.
+P6 adds self-refine (critique → compact revise) to cut verbose exact-match failures. Chart: 8.3→16.7→33.3→41.7→62.5→62.5→70.8→**70.8**.
 
-P7 adds Reflexion (verbal critique → one retry trial).
+P7 adds Reflexion (verbal critique → one retry trial). Flat on mini suite vs P6 (same 70.8%) — retry helps less without external feedback.
