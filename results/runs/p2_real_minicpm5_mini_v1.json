@@ -1,0 +1,157 @@
+{
+  "rung": 2,
+  "powers": "P0,P1,P2",
+  "model_id": "openbmb/MiniCPM5-2B",
+  "n_tasks": 24,
+  "n_success": 8,
+  "success_rate": 0.3333333333333333,
+  "avg_tokens": 13.458333333333334,
+  "avg_wall_time_s": 2.3162891212086834,
+  "total_wall_time_s": 55.5909389090084,
+  "results": [
+    {
+      "task_id": "v1_code_01",
+      "success": true,
+      "expected": "[1, 2, 3]",
+      "actual": "[1, 2, 3]"
+    },
+    {
+      "task_id": "v1_code_02",
+      "success": true,
+      "expected": "12",
+      "actual": "12"
+    },
+    {
+      "task_id": "v1_code_03",
+      "success": true,
+      "expected": "HARNESS",
+      "actual": "HARNESS"
+    },
+    {
+      "task_id": "v1_code_04",
+      "success": false,
+      "expected": "1 2 3",
+      "actual": "We need to answer: \"range(1,4) prints which numbers? space-separated\". The user is asking about Python's range function. range(1,4) generates numbers from 1 up to but not including 4. So it prints 1, 2, 3. The question"
+    },
+    {
+      "task_id": "v1_code_05",
+      "success": true,
+      "expected": "2",
+      "actual": "2"
+    },
+    {
+      "task_id": "v1_math_01",
+      "success": true,
+      "expected": "12",
+      "actual": "12"
+    },
+    {
+      "task_id": "v1_math_02",
+      "success": true,
+      "expected": "33",
+      "actual": "33"
+    },
+    {
+      "task_id": "v1_math_03",
+      "success": false,
+      "expected": "48",
+      "actual": "4"
+    },
+    {
+      "task_id": "v1_math_04",
+      "success": false,
+      "expected": "30",
+      "actual": "30 km/h"
+    },
+    {
+      "task_id": "v1_math_05",
+      "success": true,
+      "expected": "4",
+      "actual": "4"
+    },
+    {
+      "task_id": "v1_tool_01",
+      "success": false,
+      "expected": "{\"city\":\"Paris\",\"unit\":\"C\"}",
+      "actual": "So"
+    },
+    {
+      "task_id": "v1_tool_02",
+      "success": true,
+      "expected": "42",
+      "actual": "42"
+    },
+    {
+      "task_id": "v1_tool_03",
+      "success": false,
+      "expected": "ready",
+      "actual": "READY"
+    },
+    {
+      "task_id": "v1_tool_04",
+      "success": false,
+      "expected": "ops@example.com",
+      "actual": "output recipient"
+    },
+    {
+      "task_id": "v1_tool_05",
+      "success": false,
+      "expected": "count\\\\s*[:=]\\\\s*3",
+      "actual": "READY"
+    },
+    {
+      "task_id": "v1_file_01",
+      "success": false,
+      "expected": "8088",
+      "actual": "We are given a user query: \"config.toml port=8088, what port?\" The user seems to be asking about a port number from a config.toml file. The previous context says \"The file check result is FILE_OK.\" So we need to answer based on that. The"
+    },
+    {
+      "task_id": "v1_file_02",
+      "success": false,
+      "expected": "3",
+      "actual": "We are given a user query: \"README worker retries 3, how many?\" This seems to be a question about a README file or some context. However, the previous interaction was about a file check result being FILE_OK. The user might be asking about the number of retries in a"
+    },
+    {
+      "task_id": "v1_file_03",
+      "success": false,
+      "expected": "Ever",
+      "actual": "We are given a file check result of FILE_OK. The user asks: \"owners.txt owner Ever, name?\" This seems like a query about a file named \"owners.txt\" and its owner \"Ever\", asking for the name. But the context is that we are in a system where we have a"
+    },
+    {
+      "task_id": "v1_file_04",
+      "success": false,
+      "expected": "1.4.2",
+      "actual": "We are given a user query: \"changelog version 1.4.2, version?\". The assistant's previous response was \"FILE_OK\". The user is asking about a changelog version 1.4.2 and then \"version?\". This seems like a question about the"
+    },
+    {
+      "task_id": "v1_file_05",
+      "success": false,
+      "expected": "900",
+      "actual": "Now the user is asking about"
+    },
+    {
+      "task_id": "v1_long_horizon_01",
+      "success": false,
+      "expected": "9",
+      "actual": "Step"
+    },
+    {
+      "task_id": "v1_long_horizon_02",
+      "success": false,
+      "expected": "9",
+      "actual": "12"
+    },
+    {
+      "task_id": "v1_long_horizon_03",
+      "success": false,
+      "expected": "14",
+      "actual": "We are asked: \"add 10 to 1,2,3,4, last result?\" This seems like a simple arithmetic operation. We need to add 10 to each of the numbers 1, 2, 3, 4, and then give the last result. So:"
+    },
+    {
+      "task_id": "v1_long_horizon_04",
+      "success": false,
+      "expected": "C",
+      "actual": "We are asked: \"visit A then B then C, last?\" This seems like a simple question. The user might be asking about the order of visiting A, B, C, and then \"last\" meaning what comes after C? Or maybe it's a trick question. But the instruction says to follow"
+    }
+  ]
+}
