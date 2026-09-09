@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+from pathlib import Path
 import time
 from collections.abc import Iterable
 from typing import Optional
@@ -10,6 +11,7 @@ from typing import Optional
 from harness_ladder.config import ModelConfig, PowerFlags
 from harness_ladder.model import LLMClient, MockLLM
 from harness_ladder.fewshot import pack_few_shot_messages
+from harness_ladder.retriever import render_context, retrieve_from_path
 from harness_ladder.powers import apply_power_hooks
 from harness_ladder.types import Message, Trajectory
 
@@ -50,6 +52,12 @@ def run_v0_loop(
         messages.extend(
             pack_few_shot_messages(task_id=task_id, category=category, tags=tags)
         )
+    if flags.is_on("P3"):
+        corpus = Path(__file__).resolve().parents[2] / "corpus" / "task_passages.md"
+        context = render_context(retrieve_from_path(prompt, corpus, top_k=3))
+        if context:
+            messages.append(Message(role="system", content=context))
+
     messages.append(Message(role="user", content=prompt))
 
     t0 = time.perf_counter()

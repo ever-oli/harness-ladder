@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the real P1 few-shot smoke suite against MiniCPM5-2B.
+"""Run the real cumulative P1/P2/P3 suite against MiniCPM5-2B.
 
 The client is deliberately OpenAI-compatible (no MockLLM): start the live
 Lightning/vLLM endpoint first, then run this script from the repository root.
@@ -38,17 +38,17 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    if args.rung != 1:
-        raise SystemExit("This runner is intentionally limited to --rung 1 (P1); do not run P2+.")
+    if args.rung not in (1, 2, 3):
+        raise SystemExit("This runner supports cumulative rungs 1-3 (P1-P3).")
     config = ModelConfig(model_id=args.model_id, base_url=args.base_url, seed=args.seed, max_tokens=64)
     summary = run_suite(
-        rung=1,
+        rung=args.rung,
         suite_path=args.suite,
         client=OpenAICompatibleClient(config),
         config=config,
         ledger_path=args.ledger,
         write_ledger=True,
-        notes="Lightning T4 fp16 P1 few-shot FIXED packing",
+        notes=f"Lightning T4 fp16 cumulative P{args.rung} evaluation",
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     payload = {
@@ -81,7 +81,7 @@ def main() -> int:
     args.output.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
     print(
-        f"rung=1 powers={summary['powers']} passed={summary['n_success']}/{summary['n_tasks']} "
+        f"rung={summary['rung']} powers={summary['powers']} passed={summary['n_success']}/{summary['n_tasks']} "
         f"success_rate={summary['success_rate']:.2%} "
         f"avg_tokens={summary['avg_tokens']:.2f} "
         f"avg_latency_s={summary['avg_wall_time_s']:.6f} "

@@ -60,3 +60,18 @@ Serve MiniCPM5-2B with vLLM (or any OpenAI-compatible endpoint), then point `Mod
 ## License
 
 MIT — see [LICENSE](./LICENSE).
+
+
+## Evaluation marginal gains
+
+See [CLOUD_PLAN.md](CLOUD_PLAN.md) and [github.com/ever-oli/harness-ladder](https://github.com/ever-oli/harness-ladder). Exact-match success from results/ledger.csv; deltas are versus the preceding rung.
+
+| Suite / rung | Passed | Score | Marginal gain | Notes |
+|---|---:|---:|---:|---|
+| Smoke / P0 | 8/8 | 100.0% | — | MockLLM smoke |
+| Mini v1 / P0 | 2/24 | 8.3% | — | MiniCPM5-2B, T4 |
+| Mini v1 / P1 | 4/24 | 16.7% | +8.4 pp | cumulative packing |
+| Mini v1 / P2 | 8/24 | 33.3% | +16.6 pp | cumulative planning |
+| Mini v1 / P3 | 10/24 | 41.7% | **+8.4 pp** | cumulative naive retrieval; results/runs/p3_real_minicpm5_mini_v1.json |
+
+P3 adds top-k lexical passages from the local corpus while retaining P0-P2 behavior.

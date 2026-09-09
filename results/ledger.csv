@@ -7,3 +7,4 @@ rung,powers,success_rate,n_tasks,model_id,seed,notes,avg_latency_s,avg_output_to
 0,P0,0.0833,24,openbmb/MiniCPM5-2B,0,Lightning T4 MiniCPM5-2B mini v1,,,
 1,"P0,P1",0.1667,24,openbmb/MiniCPM5-2B,0,Lightning T4 MiniCPM5-2B mini v1,,,
 2,"P0,P1,P2",0.3333,24,openbmb/MiniCPM5-2B,0,Lightning T4 MiniCPM5-2B mini v1,,,
+3,"P0,P1,P2,P3",0.4167,24,openbmb/MiniCPM5-2B,0,Lightning T4 fp16 cumulative P3 evaluation,,,
