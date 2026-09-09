@@ -25,7 +25,7 @@ POWER_SPECS: Mapping[str, PowerSpec] = {
     "P5": PowerSpec("P5", "ReAct loop", "Thought → act → observe multi-step", True),
     "P6": PowerSpec("P6", "Self-refine", "Generate → critique → revise", True),
     "P7": PowerSpec("P7", "Reflexion", "Verbal reinforcement across trials", True),
-    "P8": PowerSpec("P8", "Persistent Python REPL", "Stateful code execution tool", True),
+    "P8": PowerSpec("P8", "Persistent Python REPL", "Stateful code execution tool (gated to code tasks)", True),
     "P9": PowerSpec("P9", "Sub-agents", "Spawn scoped child agents", False),
     "P10": PowerSpec("P10", "Verified skills", "Pre-tested tool/skill library", False),
     "P11": PowerSpec("P11", "Memory CRUD", "Persistent memory across tasks", False),

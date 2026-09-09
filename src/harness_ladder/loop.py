@@ -126,7 +126,7 @@ def run_v0_loop(
     P5: ReAct multi-step thought → act → observe (default up to 3 tool rounds).
     P6: self-refine (critique → compact revise) after the draft answer.
     P7: Reflexion — verbal critique, then one retry trial with that memory.
-    P8: persistent Python REPL tool (stateful across tool rounds).
+    P8: persistent Python REPL tool (stateful; gated to category=code).
     """
     config = config or ModelConfig()
     flags = flags or PowerFlags.for_rung(0)
@@ -150,14 +150,17 @@ def run_v0_loop(
         context = render_context(retrieve_from_path(prompt, corpus, top_k=3))
         if context:
             messages.append(Message(role="system", content=context))
-    repl = PersistentPythonREPL() if flags.is_on("P8") else None
+    # P8 is gated: only expose python_repl on code-category tasks to avoid
+    # word-problem regressions (math/file/long-horizon) seen on the mini suite.
+    use_repl = flags.is_on("P8") and (category or "").lower() == "code"
+    repl = PersistentPythonREPL() if use_repl else None
     extra_tools = (make_python_repl_tool(repl),) if repl is not None else None
     if flags.is_on("P4"):
         tool_msg = render_tool_definitions(extra=extra_tools)
-        hint = infer_tool_hint(prompt, python_repl=flags.is_on("P8"))
+        hint = infer_tool_hint(prompt, python_repl=use_repl)
         if hint:
             tool_msg = tool_msg + "\n\n" + hint
-        if flags.is_on("P8"):
+        if use_repl:
             tool_msg += (
                 "\n\nP8: python_repl is persistent within this task. "
                 "Use it for code execution; Final Answer with the printed/returned value only."
@@ -170,8 +173,10 @@ def run_v0_loop(
     answer = ""
     registry = tool_registry(extra=extra_tools) if flags.is_on("P4") else {}
     if max_tool_rounds is None:
-        if flags.is_on("P8") or flags.is_on("P5"):
-            rounds = 4 if flags.is_on("P8") else 3
+        if use_repl:
+            rounds = 4
+        elif flags.is_on("P5"):
+            rounds = 3
         elif flags.is_on("P4"):
             rounds = 1
         else:

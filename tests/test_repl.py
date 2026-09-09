@@ -35,3 +35,25 @@ def test_p8_loop_uses_python_repl_for_sorted():
     )
     assert traj.final_answer == "[1, 2, 3]"
     assert any("python_repl" in m.content for m in traj.messages if m.role == "system")
+
+
+def test_p8_repl_gated_off_for_math_category():
+    traj = run_v0_loop(
+        "7 red + 5 blue balls?",
+        task_id="v1_math_01",
+        client=MockLLM(),
+        flags=PowerFlags.for_rung(8),
+        category="math",
+    )
+    assert all("python_repl" not in m.content for m in traj.messages if m.role == "system")
+
+
+def test_p8_repl_gated_on_for_code_category():
+    traj = run_v0_loop(
+        "sorted([3,1,2])? list only",
+        task_id="v1_code_01",
+        client=MockLLM(),
+        flags=PowerFlags.for_rung(8),
+        category="code",
+    )
+    assert any("python_repl" in m.content for m in traj.messages if m.role == "system")

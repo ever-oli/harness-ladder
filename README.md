@@ -89,7 +89,7 @@ P6 adds self-refine (critique → compact revise) to cut verbose exact-match fai
 
 P7 adds Reflexion (verbal critique → one retry trial). Flat on mini suite vs P6 (same 70.8%) — retry helps less without external feedback.
 
-P8 adds a persistent restricted Python REPL tool for executable code/math steps. On the mini suite it **regressed** (−8.3 pp): MiniCPM often emits wrong REPL snippets (e.g. pages/day → 1.333, long-horizon stuck at start). Keep for harder code tasks; gate/prompt-tune before treating as default.
+P8 adds a persistent restricted Python REPL tool, **gated to `category=code`** (off for math/file/long-horizon). On the mini suite it **regressed** (−8.3 pp): MiniCPM often emits wrong REPL snippets (e.g. pages/day → 1.333, long-horizon stuck at start). Keep for harder code tasks; gate/prompt-tune before treating as default.
 
 ## Post-P6 debug (P7/P8)
 
