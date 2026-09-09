@@ -75,7 +75,7 @@ See [CLOUD_PLAN.md](CLOUD_PLAN.md) and [github.com/ever-oli/harness-ladder](http
 | Mini v1 / P3 | 10/24 | 41.7% | +8.4 pp | cumulative naive retrieval; results/runs/p3_real_minicpm5_mini_v1.json |
 | Mini v1 / P4 | 15/24 | 62.5% | +20.8 pp | cumulative tools (MiniCPM XML); results/runs/p4_real_minicpm5_mini_v1.json |
 | Mini v1 / P5 | 15/24 | 62.5% | +0.0 pp | cumulative ReAct; results/runs/p5_real_minicpm5_mini_v1.json |
-| Mini v1 / P6 | 19/24 | 79.2% | +16.7 pp vs P5* | self-refine FIXED; results/runs/p6_real_minicpm5_mini_v1.json |
+| Mini v1 / P6 | 19/24 | 79.2% | **+16.7 pp** | self-refine (post-debug); results/runs/p6_real_minicpm5_mini_v1.json |
 | Mini v1 / P7 | 19/24 | 79.2% | +0.0 pp | Reflexion FIXED (compact-only accept); results/runs/p7_real_minicpm5_mini_v1.json |
 | Mini v1 / P8 | 17/24 | 70.8% | **−8.3 pp** | REPL improved but still below peak; results/runs/p8_real_minicpm5_mini_v1.json |
 
