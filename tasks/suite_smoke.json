@@ -1,0 +1,50 @@
+[
+  {
+    "id": "smoke_echo_1",
+    "prompt": "Reply with exactly: OK",
+    "expected": "OK",
+    "category": "echo"
+  },
+  {
+    "id": "smoke_echo_2",
+    "prompt": "Reply with exactly: HELLO",
+    "expected": "HELLO",
+    "category": "echo"
+  },
+  {
+    "id": "smoke_math_1",
+    "prompt": "What is 2 + 2? Reply with only the number.",
+    "expected": "4",
+    "category": "math"
+  },
+  {
+    "id": "smoke_math_2",
+    "prompt": "What is 10 - 3? Reply with only the number.",
+    "expected": "7",
+    "category": "math"
+  },
+  {
+    "id": "smoke_code_1",
+    "prompt": "What does print(1+1) output? Reply with only the number.",
+    "expected": "2",
+    "category": "code"
+  },
+  {
+    "id": "smoke_tool_1",
+    "prompt": "Reply with exactly: TOOL_READY",
+    "expected": "TOOL_READY",
+    "category": "tool"
+  },
+  {
+    "id": "smoke_long_1",
+    "prompt": "Reply with exactly: DONE",
+    "expected": "DONE",
+    "category": "long_horizon"
+  },
+  {
+    "id": "smoke_file_1",
+    "prompt": "Reply with exactly: FILE_OK",
+    "expected": "FILE_OK",
+    "category": "file"
+  }
+]

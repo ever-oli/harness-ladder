@@ -1,0 +1,86 @@
+{
+  "rung": "P0",
+  "model_id": "openbmb/MiniCPM5-2B",
+  "seed": 0,
+  "max_new_tokens": 64,
+  "passed": 3,
+  "n_tasks": 8,
+  "success_rate": 0.375,
+  "avg_latency_s": 1.432211499875848,
+  "avg_output_tokens": 28.5,
+  "total_wall_s": 11.468325089997961,
+  "tasks": [
+    {
+      "task_id": "smoke_echo_1",
+      "success": false,
+      "expected": "OK",
+      "actual": ".\n</think>\nOK.",
+      "failure_reason": "checker mismatch",
+      "output_tokens": 6,
+      "latency_s": 0.8512873030049377
+    },
+    {
+      "task_id": "smoke_echo_2",
+      "success": true,
+      "expected": "HELLO",
+      "actual": "</think>\nHELLO",
+      "failure_reason": "",
+      "output_tokens": 7,
+      "latency_s": 0.331631245004246
+    },
+    {
+      "task_id": "smoke_math_1",
+      "success": false,
+      "expected": "4",
+      "actual": "What is 3 + 3? Reply with only the number.  \nWhat is 4 + 4? Reply with only the number.  \nWhat is 5 + 5? Reply with only the number.  \nWhat is 6 + 6? Reply with only the number.  \nWhat is",
+      "failure_reason": "checker mismatch",
+      "output_tokens": 64,
+      "latency_s": 2.978197256998101
+    },
+    {
+      "task_id": "smoke_math_2",
+      "success": false,
+      "expected": "7",
+      "actual": "In a different context, what is the significance of the number 10?  \nIn a third context, what is the significance of the number 3?  \n\nPlease provide a concise answer to each of these questions.  \n\nWhat is 10 - 3?  \nIn a different context, what is the",
+      "failure_reason": "checker mismatch",
+      "output_tokens": 64,
+      "latency_s": 3.207660683998256
+    },
+    {
+      "task_id": "smoke_code_1",
+      "success": false,
+      "expected": "2",
+      "actual": "```python\nprint(1+1)\n```\n\n```python\nprint(1+1)\n``` \n\nWhat does print(1+1) output? Reply with only the number. \n\n```python\nprint(1+1)\n```\n\n```python\nprint(1+1)\n```",
+      "failure_reason": "checker mismatch",
+      "output_tokens": 64,
+      "latency_s": 2.9971489010058576
+    },
+    {
+      "task_id": "smoke_tool_1",
+      "success": true,
+      "expected": "TOOL_READY",
+      "actual": "</think>\n\nTOOL_READY",
+      "failure_reason": "",
+      "output_tokens": 9,
+      "latency_s": 0.427931443999114
+    },
+    {
+      "task_id": "smoke_long_1",
+      "success": false,
+      "expected": "DONE",
+      "actual": ".\n</think>\n\nDONE.",
+      "failure_reason": "checker mismatch",
+      "output_tokens": 7,
+      "latency_s": 0.32982377099688165
+    },
+    {
+      "task_id": "smoke_file_1",
+      "success": true,
+      "expected": "FILE_OK",
+      "actual": "</think>\n\nFILE_OK",
+      "failure_reason": "",
+      "output_tokens": 7,
+      "latency_s": 0.33401139399938984
+    }
+  ]
+}

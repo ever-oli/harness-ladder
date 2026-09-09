@@ -1,0 +1,6 @@
+rung,powers,success_rate,n_tasks,model_id,seed,notes,avg_latency_s,avg_output_tokens,total_wall_s
+0,P0,1.0000,8,openbmb/MiniCPM5-2B,0,example p0 smoke,,,
+0,P0,0.375,8,openbmb/MiniCPM5-2B,0,Lightning T4 fp16 real baseline,1.432211,28.500,11.468325
+1,"P0,P1",0.0000,8,openbmb/MiniCPM5-2B,0,Lightning T4 fp16 P1 few-shot,1.876493,24.625,15.011940
+1,"P0,P1",0.2500,8,openbmb/MiniCPM5-2B,0,Lightning T4 fp16 P1 few-shot FIXED packing,,,
+1,"P0,P1",1.0000,8,openbmb/MiniCPM5-2B,0,Lightning T4 fp16 P1 few-shot FIXED packing,,,

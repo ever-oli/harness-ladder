@@ -1,0 +1,297 @@
+{
+  "rung": 1,
+  "powers": "P0,P1",
+  "model_id": "openbmb/MiniCPM5-2B",
+  "seed": 0,
+  "suite": "/teamspace/studios/this_studio/harness-ladder/tasks/suite_smoke.json",
+  "base_url": "http://127.0.0.1:8000/v1",
+  "n_tasks": 8,
+  "n_success": 8,
+  "success_rate": 1.0,
+  "avg_tokens": 1.0,
+  "avg_latency_s": 1.663798323874289,
+  "avg_wall_time_s": 1.663798323874289,
+  "total_wall_time_s": 13.310386590994312,
+  "results": [
+    {
+      "task_id": "smoke_echo_1",
+      "success": true,
+      "expected": "OK",
+      "actual": "OK",
+      "tokens_used": 1,
+      "wall_time_s": 1.5751720309999655,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "The requested status word is READY. Give only that word.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "READY",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Reply with exactly: OK",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "OK",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "smoke_echo_2",
+      "success": true,
+      "expected": "HELLO",
+      "actual": "HELLO",
+      "tokens_used": 1,
+      "wall_time_s": 1.6707688309979858,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "The requested status word is READY. Give only that word.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "READY",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Reply with exactly: HELLO",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "HELLO",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "smoke_math_1",
+      "success": true,
+      "expected": "4",
+      "actual": "4",
+      "tokens_used": 1,
+      "wall_time_s": 1.9261878350007464,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Calculate 3 + 4. Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "7",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "What is 2 + 2? Reply with only the number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "4",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "smoke_math_2",
+      "success": true,
+      "expected": "7",
+      "actual": "7",
+      "tokens_used": 1,
+      "wall_time_s": 2.542678806006734,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Calculate 3 + 4. Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "7",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "What is 10 - 3? Reply with only the number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "7",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "smoke_code_1",
+      "success": true,
+      "expected": "2",
+      "actual": "2",
+      "tokens_used": 1,
+      "wall_time_s": 1.9483099959979882,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Evaluate print(2 + 3). Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "What does print(1+1) output? Reply with only the number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "2",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "smoke_tool_1",
+      "success": true,
+      "expected": "TOOL_READY",
+      "actual": "TOOL_READY",
+      "tokens_used": 1,
+      "wall_time_s": 2.070145619996765,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "A tool completed successfully. Give only the status word READY.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "READY",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Reply with exactly: TOOL_READY",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "TOOL_READY",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "smoke_long_1",
+      "success": true,
+      "expected": "DONE",
+      "actual": "DONE",
+      "tokens_used": 1,
+      "wall_time_s": 0.32452247999754036,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "The requested operation is complete. Give only the status word DONE.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "DONE",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Reply with exactly: DONE",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "DONE",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "smoke_file_1",
+      "success": true,
+      "expected": "FILE_OK",
+      "actual": "FILE_OK",
+      "tokens_used": 1,
+      "wall_time_s": 1.2526009919965873,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "The file check result is FILE_OK. Give only that status word.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "FILE_OK",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Reply with exactly: FILE_OK",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "FILE_OK",
+          "name": null
+        }
+      ]
+    }
+  ]
+}

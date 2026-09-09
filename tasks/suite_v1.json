@@ -1,0 +1,338 @@
+[
+  {
+    "id": "v1_code_01",
+    "prompt": "sorted([3,1,2])? list only",
+    "expected": "[1, 2, 3]",
+    "category": "code",
+    "match": "exact"
+  },
+  {
+    "id": "v1_code_02",
+    "prompt": "add(7,5) where add returns a+b? number",
+    "expected": "12",
+    "category": "code",
+    "match": "exact"
+  },
+  {
+    "id": "v1_code_03",
+    "prompt": "'harness'.upper()? string only",
+    "expected": "HARNESS",
+    "category": "code",
+    "match": "exact"
+  },
+  {
+    "id": "v1_code_04",
+    "prompt": "range(1,4) prints which numbers? space-separated",
+    "expected": "1 2 3",
+    "category": "code",
+    "match": "exact"
+  },
+  {
+    "id": "v1_code_05",
+    "prompt": "len({'a':1,'b':2})? number",
+    "expected": "2",
+    "category": "code",
+    "match": "exact"
+  },
+  {
+    "id": "v1_code_06",
+    "prompt": "Is 14 even? True or False",
+    "expected": "True",
+    "category": "code",
+    "match": "exact"
+  },
+  {
+    "id": "v1_code_07",
+    "prompt": "'ladder'[1:4]?",
+    "expected": "add",
+    "category": "code",
+    "match": "exact"
+  },
+  {
+    "id": "v1_code_08",
+    "prompt": "After [1,2].append(3), list?",
+    "expected": "[1, 2, 3]",
+    "category": "code",
+    "match": "exact"
+  },
+  {
+    "id": "v1_code_09",
+    "prompt": "3*(2+4)? number",
+    "expected": "18",
+    "category": "code",
+    "match": "exact"
+  },
+  {
+    "id": "v1_code_10",
+    "prompt": "SQL keyword removing duplicate SELECT rows?",
+    "expected": "DISTINCT",
+    "category": "code",
+    "match": "exact"
+  },
+  {
+    "id": "v1_math_01",
+    "prompt": "7 red + 5 blue balls?",
+    "expected": "12",
+    "category": "math",
+    "match": "exact"
+  },
+  {
+    "id": "v1_math_02",
+    "prompt": "$40 minus $7?",
+    "expected": "33",
+    "category": "math",
+    "match": "exact"
+  },
+  {
+    "id": "v1_math_03",
+    "prompt": "8 pages for 6 days?",
+    "expected": "48",
+    "category": "math",
+    "match": "exact"
+  },
+  {
+    "id": "v1_math_04",
+    "prompt": "60 km in 2 hours speed?",
+    "expected": "30",
+    "category": "math",
+    "match": "exact"
+  },
+  {
+    "id": "v1_math_05",
+    "prompt": "24 apples / 6 children?",
+    "expected": "4",
+    "category": "math",
+    "match": "exact"
+  },
+  {
+    "id": "v1_math_06",
+    "prompt": "rectangle 9 by 4 area?",
+    "expected": "36",
+    "category": "math",
+    "match": "exact"
+  },
+  {
+    "id": "v1_math_07",
+    "prompt": "15 minus 4 plus 3?",
+    "expected": "14",
+    "category": "math",
+    "match": "exact"
+  },
+  {
+    "id": "v1_math_08",
+    "prompt": "3 cups times 4 batches?",
+    "expected": "12",
+    "category": "math",
+    "match": "exact"
+  },
+  {
+    "id": "v1_math_09",
+    "prompt": "$50 plus 10 percent tax?",
+    "expected": "55",
+    "category": "math",
+    "match": "exact"
+  },
+  {
+    "id": "v1_math_10",
+    "prompt": "3 rows of 8 minus 2?",
+    "expected": "22",
+    "category": "math",
+    "match": "exact"
+  },
+  {
+    "id": "v1_tool_01",
+    "prompt": "weather request city Paris unit C, compact JSON",
+    "expected": "{\"city\":\"Paris\",\"unit\":\"C\"}",
+    "category": "tool",
+    "match": "exact"
+  },
+  {
+    "id": "v1_tool_02",
+    "prompt": "calculator 19 + 23 final number",
+    "expected": "42",
+    "category": "tool",
+    "match": "exact"
+  },
+  {
+    "id": "v1_tool_03",
+    "prompt": "lookup status ready, JSON status",
+    "expected": "ready",
+    "category": "tool",
+    "match": "contains"
+  },
+  {
+    "id": "v1_tool_04",
+    "prompt": "email recipient ops@example.com, output recipient",
+    "expected": "ops@example.com",
+    "category": "tool",
+    "match": "contains"
+  },
+  {
+    "id": "v1_tool_05",
+    "prompt": "search found 3, JSON count 3",
+    "expected": "count\\\\s*[:=]\\\\s*3",
+    "category": "tool",
+    "match": "regex"
+  },
+  {
+    "id": "v1_tool_06",
+    "prompt": "calendar title Demo, title only",
+    "expected": "Demo",
+    "category": "tool",
+    "match": "exact"
+  },
+  {
+    "id": "v1_tool_07",
+    "prompt": "file path /tmp/report.txt, return path",
+    "expected": "/tmp/report.txt",
+    "category": "tool",
+    "match": "exact"
+  },
+  {
+    "id": "v1_tool_08",
+    "prompt": "tool temperature 21 C, report number",
+    "expected": "21",
+    "category": "tool",
+    "match": "exact"
+  },
+  {
+    "id": "v1_tool_09",
+    "prompt": "confirmed operation delete, name only",
+    "expected": "delete",
+    "category": "tool",
+    "match": "exact"
+  },
+  {
+    "id": "v1_tool_10",
+    "prompt": "database rows alpha,beta, both names",
+    "expected": "alpha,beta",
+    "category": "tool",
+    "match": "contains"
+  },
+  {
+    "id": "v1_file_01",
+    "prompt": "config.toml port=8088, what port?",
+    "expected": "8088",
+    "category": "file",
+    "match": "exact"
+  },
+  {
+    "id": "v1_file_02",
+    "prompt": "README worker retries 3, how many?",
+    "expected": "3",
+    "category": "file",
+    "match": "exact"
+  },
+  {
+    "id": "v1_file_03",
+    "prompt": "owners.txt owner Ever, name?",
+    "expected": "Ever",
+    "category": "file",
+    "match": "exact"
+  },
+  {
+    "id": "v1_file_04",
+    "prompt": "changelog version 1.4.2, version?",
+    "expected": "1.4.2",
+    "category": "file",
+    "match": "exact"
+  },
+  {
+    "id": "v1_file_05",
+    "prompt": "cache DEFAULT_TTL=900, value?",
+    "expected": "900",
+    "category": "file",
+    "match": "exact"
+  },
+  {
+    "id": "v1_file_06",
+    "prompt": "manifest license MIT, license?",
+    "expected": "MIT",
+    "category": "file",
+    "match": "exact"
+  },
+  {
+    "id": "v1_file_07",
+    "prompt": "incident service api, service?",
+    "expected": "api",
+    "category": "file",
+    "match": "exact"
+  },
+  {
+    "id": "v1_file_08",
+    "prompt": "launch region us-east-1, region?",
+    "expected": "us-east-1",
+    "category": "file",
+    "match": "exact"
+  },
+  {
+    "id": "v1_file_09",
+    "prompt": "rows cedar,maple,birch, second?",
+    "expected": "maple",
+    "category": "file",
+    "match": "exact"
+  },
+  {
+    "id": "v1_file_10",
+    "prompt": "settings workers=4, how many?",
+    "expected": "4",
+    "category": "file",
+    "match": "exact"
+  },
+  {
+    "id": "v1_long_horizon_01",
+    "prompt": "start 5, double, add 3, subtract 4, final?",
+    "expected": "9",
+    "category": "long_horizon",
+    "match": "exact"
+  },
+  {
+    "id": "v1_long_horizon_02",
+    "prompt": "2 packs of 6, use 3, remain?",
+    "expected": "9",
+    "category": "long_horizon",
+    "match": "exact"
+  },
+  {
+    "id": "v1_long_horizon_03",
+    "prompt": "add 10 to 1,2,3,4, last result?",
+    "expected": "14",
+    "category": "long_horizon",
+    "match": "exact"
+  },
+  {
+    "id": "v1_long_horizon_04",
+    "prompt": "visit A then B then C, last?",
+    "expected": "C",
+    "category": "long_horizon",
+    "match": "exact"
+  },
+  {
+    "id": "v1_long_horizon_05",
+    "prompt": "reverse north",
+    "expected": "htron",
+    "category": "long_horizon",
+    "match": "exact"
+  },
+  {
+    "id": "v1_long_horizon_06",
+    "prompt": "first letters red orange blue",
+    "expected": "ROB",
+    "category": "long_horizon",
+    "match": "exact"
+  },
+  {
+    "id": "v1_long_horizon_07",
+    "prompt": "4+4, times 2, divided by 4?",
+    "expected": "4",
+    "category": "long_horizon",
+    "match": "exact"
+  },
+  {
+    "id": "v1_long_horizon_08",
+    "prompt": "one word uppercase, season after spring",
+    "expected": "SUMMER",
+    "category": "long_horizon",
+    "match": "exact"
+  }
+]

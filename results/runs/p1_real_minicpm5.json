@@ -1,0 +1,297 @@
+{
+  "rung": 1,
+  "powers": "P0,P1",
+  "model_id": "openbmb/MiniCPM5-2B",
+  "seed": 0,
+  "suite": "/teamspace/studios/this_studio/harness-ladder/tasks/suite_smoke.json",
+  "base_url": "http://127.0.0.1:8000/v1",
+  "n_tasks": 8,
+  "n_success": 0,
+  "success_rate": 0.0,
+  "avg_tokens": 24.625,
+  "avg_latency_s": 1.8764925138757462,
+  "avg_wall_time_s": 1.8764925138757462,
+  "total_wall_time_s": 15.01194011100597,
+  "results": [
+    {
+      "task_id": "smoke_echo_1",
+      "success": false,
+      "expected": "OK",
+      "actual": "<think>\nOkay, the user is asking me to reply with exactly \"OK\". I need to make sure that I don't add anything else. Let me just output that word.\n</think>\n\nOK",
+      "tokens_used": 31,
+      "wall_time_s": 3.2999745509951026,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Reply with exactly: EXAMPLE_OK",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "EXAMPLE_OK",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Reply with exactly: OK",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "<think>\nOkay, the user is asking me to reply with exactly \"OK\". I need to make sure that I don't add anything else. Let me just output that word.\n</think>\n\nOK",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "smoke_echo_2",
+      "success": false,
+      "expected": "HELLO",
+      "actual": "<think>\nOkay, the user wants me to respond with exactly \"HELLO\". I need to make sure I don't add anything else. Let me just output that word.\n</think>\n\nHELLO",
+      "tokens_used": 29,
+      "wall_time_s": 2.0304000380056095,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Reply with exactly: EXAMPLE_OK",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "EXAMPLE_OK",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Reply with exactly: HELLO",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "<think>\nOkay, the user wants me to respond with exactly \"HELLO\". I need to make sure I don't add anything else. Let me just output that word.\n</think>\n\nHELLO",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "smoke_math_1",
+      "success": false,
+      "expected": "4",
+      "actual": "<think>\nWe need to respond with only the number. The user asks \"What is 2 + 2?\" So the answer is 4. We must reply with only the number.\n</think>\n\n4",
+      "tokens_used": 31,
+      "wall_time_s": 1.8923450799993589,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "What is 3 + 4? Reply with only the number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "7",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "What is 2 + 2? Reply with only the number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "<think>\nWe need to respond with only the number. The user asks \"What is 2 + 2?\" So the answer is 4. We must reply with only the number.\n</think>\n\n4",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "smoke_math_2",
+      "success": false,
+      "expected": "7",
+      "actual": "<think>\nWe need to answer the user's question: \"What is 10 - 3? Reply with only the number.\" The user wants just the number. So we need to compute 10 - 3 = 7. Then output only \"7\".\n</think>\n\n7",
+      "tokens_used": 40,
+      "wall_time_s": 2.600491969002178,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "What is 3 + 4? Reply with only the number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "7",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "What is 10 - 3? Reply with only the number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "<think>\nWe need to answer the user's question: \"What is 10 - 3? Reply with only the number.\" The user wants just the number. So we need to compute 10 - 3 = 7. Then output only \"7\".\n</think>\n\n7",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "smoke_code_1",
+      "success": false,
+      "expected": "2",
+      "actual": "<think>\nWe are asked to output the result of print(1+1) and reply with only the number.\n The expression 1+1 equals 2.\n So the answer is 2.\n</think>\n\n2",
+      "tokens_used": 28,
+      "wall_time_s": 1.9841839459986659,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "What does print(2+3) output? Reply with only the number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "What does print(1+1) output? Reply with only the number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "<think>\nWe are asked to output the result of print(1+1) and reply with only the number.\n The expression 1+1 equals 2.\n So the answer is 2.\n</think>\n\n2",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "smoke_tool_1",
+      "success": false,
+      "expected": "TOOL_READY",
+      "actual": "<think>\nOkay, the user is asking me to reply with exactly \"TOOL_READY\". I need to make sure that I don't add any other text. Just the exact phrase they specified.\n</think>\n\nTOOL_READY",
+      "tokens_used": 32,
+      "wall_time_s": 2.505311075001373,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Reply with exactly: TOOL_OK",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "TOOL_OK",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Reply with exactly: TOOL_READY",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "<think>\nOkay, the user is asking me to reply with exactly \"TOOL_READY\". I need to make sure that I don't add any other text. Just the exact phrase they specified.\n</think>\n\nTOOL_READY",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "smoke_long_1",
+      "success": false,
+      "expected": "DONE",
+      "actual": "<think>\n\n</think>\n\nDONE",
+      "tokens_used": 3,
+      "wall_time_s": 0.32404474500071956,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "After completing the step, reply with exactly: DONE",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "DONE",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Reply with exactly: DONE",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "<think>\n\n</think>\n\nDONE",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "smoke_file_1",
+      "success": false,
+      "expected": "FILE_OK",
+      "actual": "<think>\n\n</think>\n\nFILE_OK",
+      "tokens_used": 3,
+      "wall_time_s": 0.3751887070029625,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Reply with exactly: FILE_OK",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "FILE_OK",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Reply with exactly: FILE_OK",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "<think>\n\n</think>\n\nFILE_OK",
+          "name": null
+        }
+      ]
+    }
+  ]
+}
