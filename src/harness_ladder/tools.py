@@ -199,18 +199,46 @@ def render_tool_definitions(tools: tuple[ToolSpec, ...] | None = None) -> str:
     return "\n".join(lines)
 
 
+_LOOSE_FUNCTION_RE = re.compile(
+    r'(?:<function\s+)?name="(?P<name>weather|calculator|lookup|email|search)"\s*>'
+    r'(?P<body>.*?)(?:</function>|$)',
+    re.IGNORECASE | re.DOTALL,
+)
+_LOOSE_PARAM_RE = re.compile(
+    r'(?:<param\s+)?name="(?P<name>[^"]+)"\s*>(?P<value>.*?)(?:</param>|(?=(?:(?:<param\s+)?name=")|$))',
+    re.IGNORECASE | re.DOTALL,
+)
+
+
 def parse_tool_calls(text: str) -> list[ToolCall]:
-    """Extract MiniCPM5 XML tool calls from model output."""
+    """Extract MiniCPM5 XML tool calls, including mangled tag-less variants."""
+    raw = text or ""
     calls: list[ToolCall] = []
-    for match in _FUNCTION_RE.finditer(text or ""):
+
+    def _params(body: str) -> dict[str, str]:
         args: dict[str, str] = {}
-        for param in _PARAM_RE.finditer(match.group("body")):
+        for param in _PARAM_RE.finditer(body):
             value = param.group("value").strip()
             cdata = _CDATA_RE.fullmatch(value)
             if cdata:
                 value = cdata.group(1)
             args[param.group("name")] = value
-        calls.append(ToolCall(name=match.group("name").strip(), arguments=args))
+        if not args:
+            for param in _LOOSE_PARAM_RE.finditer(body):
+                value = param.group("value").strip()
+                value = re.sub(r"</?(?:param|function)>", "", value).strip()
+                if value:
+                    args[param.group("name")] = value
+        return args
+
+    for match in _FUNCTION_RE.finditer(raw):
+        calls.append(ToolCall(name=match.group("name").strip(), arguments=_params(match.group("body"))))
+    if calls:
+        return calls
+    for match in _LOOSE_FUNCTION_RE.finditer(raw):
+        args = _params(match.group("body"))
+        if args:
+            calls.append(ToolCall(name=match.group("name").strip(), arguments=args))
     return calls
 
 

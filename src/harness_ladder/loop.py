@@ -1,4 +1,4 @@
-"""P0 — V0 sampling loop with cumulative P1–P4 harness powers."""
+"""P0 — V0 sampling loop with cumulative P1–P5 harness powers."""
 
 from __future__ import annotations
 
@@ -28,6 +28,19 @@ _P2_PROTOCOL = (
     "Never output scratch work, chain-of-thought, or <think> tags."
 )
 
+_P5_REACT = (
+    "P5 ReAct protocol (budget ~{budget} tokens of private thought per step):\n"
+    "1. Optionally write one short line: Thought: <plan>\n"
+    "2. Either call a tool with MiniCPM XML "
+    '<function name="tool"><param name="k">v</param></function>\n'
+    "   or finish with: Final Answer: <answer only>\n"
+    "3. After a <tool_response>, think again or give Final Answer.\n"
+    "Do not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search."
+)
+
+_FINAL_RE = re.compile(r"(?im)^\s*Final Answer:\s*(.+)\s*$")
+_THOUGHT_LINE_RE = re.compile(r"(?im)^\s*Thought:\s*.+$")
+
 
 def _p2_answer_only(text: str) -> str:
     text = re.sub(r"<think\b[^>]*>.*?</think>", "", text, flags=re.I | re.S)
@@ -35,15 +48,33 @@ def _p2_answer_only(text: str) -> str:
     return text.split("FINAL_ANSWER:", 1)[-1].strip()
 
 
+def _extract_final_answer(text: str) -> str | None:
+    matches = list(_FINAL_RE.finditer(text or ""))
+    if matches:
+        return matches[-1].group(1).strip()
+    return None
+
+
 def _finalize_answer(text: str, flags: PowerFlags) -> str:
-    answer = text.strip()
-    if flags.is_on("P2"):
+    answer = (text or "").strip()
+    if flags.is_on("P5"):
+        extracted = _extract_final_answer(answer)
+        if extracted:
+            answer = extracted
+        else:
+            # Drop Thought lines; keep last non-empty content line.
+            lines = [
+                line.strip()
+                for line in answer.splitlines()
+                if line.strip() and not _THOUGHT_LINE_RE.match(line)
+            ]
+            if lines:
+                answer = lines[-1]
+    if flags.is_on("P2") and not flags.is_on("P5"):
         answer = _p2_answer_only(answer)
-    # Strip leftover tool XML if the model mixed formats.
-    if flags.is_on("P4") and "<function" in answer.lower():
+    if flags.is_on("P4"):
         calls = parse_tool_calls(answer)
         if calls:
-            # Prefer executed tool result when the model never produced a final turn.
             answer = execute_tool_call(calls[0])
     return answer.strip()
 
@@ -58,12 +89,12 @@ def run_v0_loop(
     system: str = "You are a helpful assistant. Follow instructions precisely.",
     category: str | None = None,
     tags: Iterable[str] | None = None,
-    max_tool_rounds: int = 1,
+    max_tool_rounds: int | None = None,
 ) -> Trajectory:
-    """Execute the sampling loop with cumulative P0–P4 powers.
+    """Execute the sampling loop with cumulative P0–P5 powers.
 
-    P4 adds MiniCPM5-style tool definitions and a single tool-call round
-    (call → observe → final answer). Multi-step ReAct belongs to P5.
+    P4: tool definitions + one call round.
+    P5: ReAct multi-step thought → act → observe (default up to 3 tool rounds).
     """
     config = config or ModelConfig()
     flags = flags or PowerFlags.for_rung(0)
@@ -72,7 +103,11 @@ def run_v0_loop(
     apply_power_hooks(flags)
 
     messages = [Message(role="system", content=system)]
-    if flags.is_on("P2"):
+    if flags.is_on("P5"):
+        messages.append(
+            Message(role="system", content=_P5_REACT.format(budget=config.reasoning_token_budget))
+        )
+    elif flags.is_on("P2"):
         messages.append(
             Message(role="system", content=_P2_PROTOCOL.format(budget=config.reasoning_token_budget))
         )
@@ -95,17 +130,35 @@ def run_v0_loop(
     t0 = time.perf_counter()
     answer = ""
     registry = tool_registry() if flags.is_on("P4") else {}
-    rounds = max_tool_rounds if flags.is_on("P4") else 0
+    if max_tool_rounds is None:
+        if flags.is_on("P5"):
+            rounds = 3
+        elif flags.is_on("P4"):
+            rounds = 1
+        else:
+            rounds = 0
+    else:
+        rounds = max_tool_rounds if flags.is_on("P4") else 0
 
     for _ in range(rounds + 1):
         raw = client.complete(messages).strip()
         messages.append(Message(role="assistant", content=raw))
+
+        if flags.is_on("P5") and _extract_final_answer(raw) is not None:
+            answer = raw
+            break
+
         if flags.is_on("P4"):
             calls = parse_tool_calls(raw)
             if calls and rounds > 0:
-                # Execute the first call only (P4 = definitions + calling, not multi-act ReAct).
-                result = execute_tool_call(calls[0], registry)
-                messages.append(Message(role="user", content=format_tool_response(result)))
+                # Execute all parsed calls this turn (usually one); feed observations.
+                observations = []
+                for call in calls[:3]:
+                    observations.append(execute_tool_call(call, registry))
+                obs = "\n".join(format_tool_response(item) for item in observations)
+                if flags.is_on("P5"):
+                    obs += "\nContinue ReAct. Use Final Answer: when done."
+                messages.append(Message(role="user", content=obs))
                 rounds -= 1
                 continue
         answer = raw

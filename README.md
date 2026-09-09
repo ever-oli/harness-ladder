@@ -40,7 +40,7 @@ flags = PowerFlags.for_rung(3)   # P0,P1,P2,P3
 assert enable_up_to(0).is_on("P0")
 ```
 
-**P0–P4** change control flow today (few-shot, budgeted thinking, retrieval, tools). P5–P12 remain stubs.
+**P0–P5** change control flow today (few-shot, budgeted thinking, retrieval, tools). P5–P12 remain stubs.
 
 ## Ledger
 
@@ -78,3 +78,5 @@ See [CLOUD_PLAN.md](CLOUD_PLAN.md) and [github.com/ever-oli/harness-ladder](http
 P3 adds top-k lexical passages from the local corpus while retaining P0-P2 behavior.
 
 P4 adds MiniCPM5-style tool definitions + one XML tool-call round (call → observe → answer). Chart: 8.3→16.7→33.3→41.7→**62.5**.
+
+P5 adds a ReAct loop (Thought → tool act → observe, up to 3 rounds) on top of P4 tools.

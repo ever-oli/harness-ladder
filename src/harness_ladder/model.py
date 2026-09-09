@@ -48,8 +48,14 @@ class MockLLM:
                 break
 
         # After a tool response, emit the tool payload as the final answer.
-        if user_text.strip().startswith("<tool_response>"):
-            body = re.sub(r"</?tool_response>", "", user_text).strip()
+        if "<tool_response>" in user_text:
+            body = re.sub(r"</?tool_response>", "", user_text)
+            body = re.sub(r"(?is)Continue ReAct.*$", "", body).strip()
+            # Prefer first tool payload line.
+            body = body.splitlines()[0].strip() if body else ""
+            system_blob = "\n".join(m.content for m in messages if m.role == "system")
+            if "P5 ReAct" in system_blob:
+                return f"Final Answer: {body}"
             return body
 
         system_blob = "\n".join(m.content for m in messages if m.role == "system")
@@ -77,19 +83,32 @@ class MockLLM:
 
         if tools_enabled:
             lower = user_text.lower()
+            system_blob = "\n".join(m.content for m in messages if m.role == "system")
+            react = "P5 ReAct" in system_blob
             if "weather" in lower and "paris" in lower:
                 return '<function name="weather"><param name="city">Paris</param><param name="unit">C</param></function>'
             calc = re.search(r"calculator\s+(\d+)\s*\+\s*(\d+)", user_text, re.I)
             if calc:
                 expr = f"{calc.group(1)}+{calc.group(2)}"
                 return f'<function name="calculator"><param name="expression">{expr}</param></function>'
-            if "lookup" in lower or "status" in lower:
+            if "lookup" in lower or ("status" in lower and "ready" in lower):
                 return '<function name="lookup"><param name="key">status</param></function>'
             email = re.search(r"([\w.+-]+@[\w.-]+)", user_text)
             if "email" in lower and email:
                 return f'<function name="email"><param name="recipient">{email.group(1)}</param></function>'
             if "search" in lower and "count" in lower:
                 return '<function name="search"><param name="count">3</param></function>'
+            # Multi-step arithmetic via calculator under ReAct.
+            if react and re.search(r"start\s+\d+|packs of|add \d+ to", lower):
+                # Encode the closed-form result for suite long-horizon tasks.
+                if "start 5" in lower:
+                    return '<function name="calculator"><param name="expression">(5*2)+3-4</param></function>'
+                if "2 packs of 6" in lower:
+                    return '<function name="calculator"><param name="expression">(2*6)-3</param></function>'
+                if "add 10 to 1,2,3,4" in lower:
+                    return '<function name="calculator"><param name="expression">4+10</param></function>'
+            if react and "visit a then b then c" in lower:
+                return "Final Answer: C"
 
         return "OK"
 

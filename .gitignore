@@ -38,3 +38,6 @@ results/traces/
 models/
 .venv/
 harness-ladder-sync.tar.gz
+
+.venv/
+
