@@ -72,8 +72,10 @@ class PersistentPythonREPL:
             chunks: list[str] = []
             if printed:
                 chunks.append(printed.rstrip("\n"))
-            if last_expr is not None:
+            if last_expr is not None and value is not None:
                 chunks.append(value if isinstance(value, str) else repr(value))
+            elif last_expr is not None and not printed:
+                chunks.append("None")
             return ("\n".join(chunks) if chunks else "None")[:max_chars]
         except Exception:  # noqa: BLE001
             return f"Error: {traceback.format_exc(limit=1).strip()}"[:max_chars]

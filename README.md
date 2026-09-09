@@ -90,3 +90,12 @@ P6 adds self-refine (critique → compact revise) to cut verbose exact-match fai
 P7 adds Reflexion (verbal critique → one retry trial). Flat on mini suite vs P6 (same 70.8%) — retry helps less without external feedback.
 
 P8 adds a persistent restricted Python REPL tool for executable code/math steps. On the mini suite it **regressed** (−8.3 pp): MiniCPM often emits wrong REPL snippets (e.g. pages/day → 1.333, long-horizon stuck at start). Keep for harder code tasks; gate/prompt-tune before treating as default.
+
+## Post-P6 debug (P7/P8)
+
+Root causes for flat/regression after P6:
+1. **P7** reflections urged adding `$`/units, then overwrote good answers (`12`→`7`, `33`→`$33`).
+2. **P8** REPL appended `None` after `print(...)`, and hints over-triggered REPL on word problems.
+3. **tool_05** regex was double-escaped (`count\\s*...`) so `count: 3` never matched.
+
+Fixes: compact-only Reflexion accept, strip `$`/units in normalize, REPL print cleanup, softer REPL hints, suite regex repair.

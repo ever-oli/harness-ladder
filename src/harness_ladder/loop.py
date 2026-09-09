@@ -23,7 +23,7 @@ from harness_ladder.tools import (
     render_tool_definitions,
     tool_registry,
 )
-from harness_ladder.refine import self_refine
+from harness_ladder.refine import normalize_compact, self_refine
 from harness_ladder.reflexion import reflect, retry_with_reflection
 from harness_ladder.types import Message, Trajectory
 
@@ -50,6 +50,31 @@ def _p2_answer_only(text: str) -> str:
     text = re.sub(r"<think\b[^>]*>.*?</think>", "", text, flags=re.I | re.S)
     text = re.sub(r"<think\b[^>]*>.*$", "", text, flags=re.I | re.S)
     return text.split("FINAL_ANSWER:", 1)[-1].strip()
+
+
+
+def _prefer_retry(prompt: str, draft: str, retried: str) -> str:
+    """Keep Reflexion retries from expanding or randomly rewriting good answers.
+
+    Without external feedback, only accept a retry when it is strictly more compact
+    (or an equal normalize cleanup). Otherwise keep the draft.
+    """
+    if not retried:
+        return draft
+    d = normalize_compact(draft, prompt=prompt)
+    r = normalize_compact(retried, prompt=prompt)
+    if not r:
+        return d
+    if r == d:
+        return r
+    if len(r.split()) < len(d.split()):
+        return r
+    # Equal token count: only accept shorter form if it is a decoration strip of draft.
+    if len(r.split()) == len(d.split()) and len(r) < len(d):
+        compact_draft = d.replace("$", "").replace(",", "")
+        if r in compact_draft:
+            return r
+    return d
 
 
 def _extract_final_answer(text: str) -> str | None:
@@ -194,9 +219,7 @@ def run_v0_loop(
         if flags.is_on("P6"):
             retried = self_refine(client, prompt, retried)
         messages.append(Message(role="assistant", content=f"P7_RETRY: {retried}"))
-        # Prefer retry when non-empty; Reflexion is a second trial.
-        if retried:
-            answer = retried
+        answer = _prefer_retry(prompt, answer, retried)
     elapsed = time.perf_counter() - t0
 
     return Trajectory(

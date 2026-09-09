@@ -17,7 +17,9 @@ def build_reflection_messages(prompt: str, draft: str) -> list[Message]:
     body = (
         f"{_REFLEXION_MARKER}\n"
         "Write a short Reflection (1-2 sentences) about mistakes in the draft "
-        "for exact-match grading (wrong value, missing items, verbosity, units).\n"
+        "for exact-match grading.\n"
+        "Rules: prefer bare numbers/tokens; NEVER suggest adding units, currency signs, "
+        "or restating the question. Flag verbosity and wrong values only.\n"
         "Do not give the final answer yet.\n\n"
         f"Question: {prompt}\n"
         f"Draft: {draft}\n"
@@ -32,7 +34,7 @@ def build_reflection_messages(prompt: str, draft: str) -> list[Message]:
 def build_retry_messages(prompt: str, draft: str, reflection: str) -> list[Message]:
     body = (
         f"{_REFLEXION_MARKER}_RETRY\n"
-        "Use the reflection to answer again. Output only the exact final answer.\n\n"
+        "Use the reflection to answer again. Output ONLY the bare exact final answer (no $, no units, no sentence).\n\n"
         f"Question: {prompt}\n"
         f"Previous draft: {draft}\n"
         f"Reflection: {reflection}\n"

@@ -26,6 +26,13 @@ def normalize_compact(draft: str, *, prompt: str = "") -> str:
         return text
     text = re.sub(r"(?im)^\s*Final Answer:\s*", "", text).strip()
     text = re.sub(r"</?think>", "", text, flags=re.I).strip()
+    # Drop currency markers and common trailing unit words for exact-match.
+    text = text.replace("$", "").strip()
+    text = re.sub(
+        r"(?i)\s+(?:apples?|oranges?|balls?|pages?|children|km/?h|dollars?|times)\.?$",
+        "",
+        text,
+    ).strip()
 
     # Prefer embedded JSON objects for tool-style asks.
     if "json" in prompt.lower() or "weather" in prompt.lower() or "count" in prompt.lower():

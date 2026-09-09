@@ -100,7 +100,7 @@
   {
     "id": "v1_tool_05",
     "prompt": "search found 3, JSON count 3",
-    "expected": "count\\\\s*[:=]\\\\s*3",
+    "expected": "count\\s*[:=]\\s*3",
     "category": "tool",
     "match": "regex"
   },

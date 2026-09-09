@@ -295,20 +295,9 @@ def infer_tool_hint(prompt: str, *, python_repl: bool = False) -> str | None:
     lower = prompt.lower()
     if python_repl and any(
         k in lower
-        for k in (
-            "sorted(",
-            "range(",
-            "len(",
-            ".upper(",
-            "print",
-            "add(",
-            "packs",
-            "double",
-            "start ",
-            "visit ",
-        )
+        for k in ("sorted(", "range(", "len(", ".upper(", "print(", "__")
     ):
-        return "Prefer the python_repl tool for code/math steps; state persists across calls."
+        return "Prefer the python_repl tool for code execution; state persists across calls."
     if "weather" in lower:
         return "Prefer the weather tool."
     if "calculator" in lower or re.search(r"\d+\s*[+\-*/]\s*\d+", prompt):
