@@ -73,10 +73,11 @@ See [CLOUD_PLAN.md](CLOUD_PLAN.md) and [github.com/ever-oli/harness-ladder](http
 | Mini v1 / P1 | 4/24 | 16.7% | +8.4 pp | cumulative packing |
 | Mini v1 / P2 | 8/24 | 33.3% | +16.6 pp | cumulative planning |
 | Mini v1 / P3 | 10/24 | 41.7% | +8.4 pp | cumulative naive retrieval; results/runs/p3_real_minicpm5_mini_v1.json |
-| Mini v1 / P4 | 15/24 | 62.5% | **+20.8 pp** | cumulative tools (MiniCPM XML); results/runs/p4_real_minicpm5_mini_v1.json |
+| Mini v1 / P4 | 15/24 | 62.5% | +20.8 pp | cumulative tools (MiniCPM XML); results/runs/p4_real_minicpm5_mini_v1.json |
+| Mini v1 / P5 | 15/24 | 62.5% | **+0.0 pp** | cumulative ReAct; results/runs/p5_real_minicpm5_mini_v1.json |
 
 P3 adds top-k lexical passages from the local corpus while retaining P0-P2 behavior.
 
-P4 adds MiniCPM5-style tool definitions + one XML tool-call round (call → observe → answer). Chart: 8.3→16.7→33.3→41.7→**62.5**.
+P4 adds MiniCPM5-style tool definitions + one XML tool-call round (call → observe → answer). Chart: 8.3→16.7→33.3→41.7→62.5→**62.5**.
 
-P5 adds a ReAct loop (Thought → tool act → observe, up to 3 rounds) on top of P4 tools.
+P5 adds a ReAct loop (Thought → tool act → observe, up to 3 rounds) on top of P4 tools. P5 ReAct traded wins: recovered code/tool/long-horizon XML cases, but some exact-match file/math answers became verbose sentences (net flat).
