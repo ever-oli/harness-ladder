@@ -115,12 +115,14 @@ Mitigations: category-matched few-shots, category tool filters + file read-gate,
 
 ## Evaluation — suite_v1 (48 tasks)
 
+Chart: P0 **6.3%** → P8 **100%** (+93.7 pp) on fixed `openbmb/MiniCPM5-2B` weights.
+
 Same MiniCPM5-2B weights; cumulative harness. Mini suite (24) hit 100% at P8; this is the harder ruler.
 
 | Suite / rung | Passed | Score | Notes |
 |---|---:|---:|---|
 | suite_v1 / P0 | 3/48 | 6.3% | bare loop |
-| suite_v1 / P8 | 47/48 | **97.9%** | after last-4 chips (`b6d7988`); `p8_real_minicpm5_suite_v1_fix2.json` |
+| suite_v1 / P8 | 48/48 | **100%** | P7 number-lock (`77b038a`); `p8_real_minicpm5_suite_v1_fix3.json` |
 
-Remaining P8 miss: `long_horizon_07` (P7 flipped tool-verified 4→16; fix in flight).
+suite_v1 P8 saturated at **48/48 (100%)** (same MiniCPM5-2B weights; harness-only climb from P0 6.3%).
 

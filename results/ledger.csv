@@ -24,3 +24,4 @@ rung,powers,success_rate,n_tasks,model_id,seed,notes,avg_latency_s,avg_output_to
 8,"P0,P1,P2,P3,P4,P5,P6,P7,P8",0.8333,48,openbmb/MiniCPM5-2B,0,Lightning T4 fp16 cumulative P8 evaluation,,,
 8,"P0,P1,P2,P3,P4,P5,P6,P7,P8",0.9167,48,openbmb/MiniCPM5-2B,0,Lightning T4 fp16 cumulative P8 evaluation,,,
 8,"P0,P1,P2,P3,P4,P5,P6,P7,P8",0.9792,48,openbmb/MiniCPM5-2B,0,Lightning T4 fp16 cumulative P8 evaluation,,,
+8,"P0,P1,P2,P3,P4,P5,P6,P7,P8",1.0000,48,openbmb/MiniCPM5-2B,0,Lightning T4 fp16 cumulative P8 evaluation,,,
