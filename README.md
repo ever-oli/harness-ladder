@@ -133,3 +133,14 @@ Chart: **6.3 → 68.8 → 72.9 → 75.0 → 75.0 → 85.4 → 95.8 → 100 → 1
 
 suite_v1 saturates at P7/P8 (**48/48**). Biggest jumps: P0→P1 (few-shot) and P5→P6 (self-refine). Tools alone (P4) flat vs P3 on this suite.
 
+## Evaluation — suite_v2 (64 tasks, paper mix)
+
+Harder ruler after suite_v1 saturated. Fixed seed `42` samples from:
+
+| Source | n | Paper |
+|--|--:|--|
+| GSM8K | 24 | Cobbe et al. 2021 (arXiv:2110.14168) |
+| BIG-Bench Hard | 24 | Suzgun et al. 2022 (arXiv:2210.09261) |
+| MBPP | 16 | Austin et al. 2021 (arXiv:2108.07732) |
+
+Rebuild: `python scripts/build_suite_v2.py` (needs `datasets`). Chart endpoints TBD (P0 / P7 / P8).

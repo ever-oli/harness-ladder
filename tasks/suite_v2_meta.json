@@ -1,0 +1,16 @@
+{
+  "name": "suite_v2",
+  "seed": 42,
+  "n_tasks": 64,
+  "composition": {
+    "gsm8k": 24,
+    "bbh": 24,
+    "mbpp": 16
+  },
+  "papers": [
+    "Cobbe et al. 2021 \u2014 GSM8K (arXiv:2110.14168)",
+    "Suzgun et al. 2022 \u2014 BIG-Bench Hard (arXiv:2210.09261)",
+    "Austin et al. 2021 \u2014 MBPP (arXiv:2108.07732)"
+  ],
+  "notes": "Harder ruler after suite_v1 saturation. Fixed seed 42."
+}
