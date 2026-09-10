@@ -22,6 +22,7 @@ from harness_ladder.tools import (
     parse_tool_calls,
     render_tool_definitions,
     tool_registry,
+    tools_for_category,
 )
 from harness_ladder.refine import normalize_compact, self_refine
 from harness_ladder.reflexion import reflect, retry_with_reflection
@@ -40,6 +41,13 @@ _P5_REACT = (
     "   or finish with: Final Answer: <answer only>\n"
     "3. After a <tool_response>, think again or give Final Answer.\n"
     "Do not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search."
+)
+
+
+_P_PLAN_ONCE = (
+    "Plan-once (small-model harness): for multi-step arithmetic, write ONE calculator "
+    "expression that covers every step, then Final Answer with the bare number. "
+    "Do not stop after the first partial hop."
 )
 
 _FINAL_RE = re.compile(r"(?im)^\s*Final Answer:\s*(.+)\s*$")
@@ -139,6 +147,8 @@ def run_v0_loop(
         messages.append(
             Message(role="system", content=_P5_REACT.format(budget=config.reasoning_token_budget))
         )
+        if (category or "").lower() in {"long_horizon", "math"}:
+            messages.append(Message(role="system", content=_P_PLAN_ONCE))
     elif flags.is_on("P2"):
         messages.append(
             Message(role="system", content=_P2_PROTOCOL.format(budget=config.reasoning_token_budget))
@@ -150,28 +160,42 @@ def run_v0_loop(
         context = render_context(retrieve_from_path(prompt, corpus, top_k=3))
         if context:
             messages.append(Message(role="system", content=context))
+            if (category or "").lower() == "file":
+                messages.append(
+                    Message(
+                        role="system",
+                        content=(
+                            "P3 read-gate: answer ONLY from the private reference passages above. "
+                            "Do not call tools. Emit the bare requested field only."
+                        ),
+                    )
+                )
     # P8 is gated: only expose python_repl on code-category tasks to avoid
     # word-problem regressions (math/file/long-horizon) seen on the mini suite.
     use_repl = flags.is_on("P8") and (category or "").lower() == "code"
     repl = PersistentPythonREPL() if use_repl else None
     extra_tools = (make_python_repl_tool(repl),) if repl is not None else None
     if flags.is_on("P4"):
-        tool_msg = render_tool_definitions(extra=extra_tools)
-        hint = infer_tool_hint(prompt, python_repl=use_repl)
-        if hint:
-            tool_msg = tool_msg + "\n\n" + hint
-        if use_repl:
-            tool_msg += (
-                "\n\nP8: python_repl is persistent within this task. "
-                "Use it for code execution; Final Answer with the printed/returned value only."
-            )
-        messages.append(Message(role="system", content=tool_msg))
+        selected = tools_for_category(category, extra=extra_tools)
+        registry = tool_registry(tools=selected) if selected else {}
+        if selected:
+            tool_msg = render_tool_definitions(tools=selected)
+            hint = infer_tool_hint(prompt, python_repl=use_repl)
+            if hint:
+                tool_msg = tool_msg + "\n\n" + hint
+            if use_repl:
+                tool_msg += (
+                    "\n\nP8: python_repl is persistent within this task. "
+                    "Use it for code execution; Final Answer with the printed/returned value only."
+                )
+            messages.append(Message(role="system", content=tool_msg))
+    else:
+        registry = {}
 
     messages.append(Message(role="user", content=prompt))
 
     t0 = time.perf_counter()
     answer = ""
-    registry = tool_registry(extra=extra_tools) if flags.is_on("P4") else {}
     if max_tool_rounds is None:
         if use_repl:
             rounds = 4

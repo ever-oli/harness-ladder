@@ -73,10 +73,14 @@ def test_p1_packs_family_aware_exemplar_before_query():
         flags=PowerFlags.for_rung(1),
     )
     assert traj.final_answer == "4"
-    assert [m.role for m in traj.messages] == ["system", "user", "assistant", "user", "assistant"]
+    roles = [m.role for m in traj.messages]
+    # math family now packs up to 2 exemplars by default
+    assert roles[0] == "system"
+    assert roles[-2:] == ["user", "assistant"]
+    assert roles.count("user") >= 2 and roles.count("assistant") >= 2
     assert traj.messages[1].content == "Calculate 3 + 4. Give only the final number."
     assert traj.messages[2].content == "7"
-    assert traj.messages[3].content.endswith("only the number.")
+    assert traj.messages[-2].content.endswith("only the number.")
 
 def test_p1_uses_generic_answer_only_examples_without_metadata():
     traj = run_v0_loop(

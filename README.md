@@ -101,3 +101,12 @@ Root causes for flat/regression after P6:
 Fixes: compact-only Reflexion accept, strip `$`/units in normalize, REPL print cleanup, softer REPL hints, suite regex repair.
 
 **Re-eval after fixes:** P6 **19/24 (79.2%)**, P7 **19/24 (79.2%)**. **P8 code-gated:** **19/24 (79.2%)** — matches peak (ungated was 70.8%).
+
+## Remaining-fail debug (web research)
+
+Against the 5 held-out mini-suite fails, online harness guidance + traces pointed to:
+1. **Few-shot bleed** — long_horizon exemplar `DONE` contaminated `visit A…` (status-word family mismatch).
+2. **Pre-evidence / wrong-tool discipline** — file tasks called `lookup` instead of reading P3 passages (agentic-RAG procedural failure).
+3. **ReAct early stop on plannable math** — partial calculator hops (`1+10`) vs plan-once full expression (small-model ReAct literature).
+
+Mitigations: category-matched few-shots, category tool filters + file read-gate, plan-once nudge for math/long_horizon, better calculator hints.

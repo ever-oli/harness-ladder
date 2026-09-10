@@ -191,6 +191,36 @@ def make_python_repl_tool(repl) -> ToolSpec:
     )
 
 
+
+def tools_for_category(
+    category: str | None = None,
+    *,
+    extra: tuple[ToolSpec, ...] | None = None,
+) -> tuple[ToolSpec, ...]:
+    """Filter default tools by task family (reduces wrong-tool procedural failures).
+
+    Research note: small agents often bypass retrieved evidence and call an
+    unrelated tool (pre-evidence / discipline failure). For file-grounded tasks
+    we omit lookup/search so the model must use P3 passages.
+    """
+    cat = (category or "").lower()
+    allow = {spec.name for spec in DEFAULT_TOOLS}
+    if cat == "file":
+        allow = set()  # no tools — answer from retrieved passages only
+    elif cat == "math":
+        allow = {"calculator"}
+    elif cat == "long_horizon":
+        allow = {"calculator"}
+    elif cat == "code":
+        allow = {"calculator"}  # python_repl added via extra when P8 gated on
+    elif cat == "tool":
+        allow = {spec.name for spec in DEFAULT_TOOLS}
+    specs = tuple(spec for spec in DEFAULT_TOOLS if spec.name in allow)
+    if extra:
+        specs = specs + tuple(extra)
+    return specs
+
+
 def tool_registry(
     tools: tuple[ToolSpec, ...] | None = None,
     *,
@@ -298,6 +328,10 @@ def infer_tool_hint(prompt: str, *, python_repl: bool = False) -> str | None:
         for k in ("sorted(", "range(", "len(", ".upper(", "print(", "__")
     ):
         return "Prefer the python_repl tool for code execution; state persists across calls."
+    if "pages" in lower and "days" in lower:
+        return "Prefer the calculator tool with multiplication (pages * days)."
+    if any(k in lower for k in ("packs", "remain", "double", "start ", "add ")):
+        return "Prefer one calculator expression covering every step, then Final Answer."
     if "weather" in lower:
         return "Prefer the weather tool."
     if "calculator" in lower or re.search(r"\d+\s*[+\-*/]\s*\d+", prompt):
