@@ -62,11 +62,11 @@ def _p2_answer_only(text: str) -> str:
 
 
 
-def _prefer_retry(prompt: str, draft: str, retried: str) -> str:
-    """Keep Reflexion retries from expanding or randomly rewriting good answers.
+def _prefer_retry(prompt: str, draft: str, retried: str, *, reflection: str = "") -> str:
+    """Keep Reflexion retries from expanding answers — but accept real corrections.
 
-    Without external feedback, only accept a retry when it is strictly more compact
-    (or an equal normalize cleanup). Otherwise keep the draft.
+    Reject unit/$ expansions. Accept retries when the draft is XML garbage or the
+    reflection flags a wrong value (equal-length token swaps like confirmed→delete).
     """
     if not retried:
         return draft
@@ -76,12 +76,19 @@ def _prefer_retry(prompt: str, draft: str, retried: str) -> str:
         return d
     if r == d:
         return r
+    # Draft looks like broken tool/XML residue.
+    low = d.lower()
+    if "]]>" in d or "<function" in low or 'name="' in d or "<param" in low:
+        return r
     if len(r.split()) < len(d.split()):
         return r
-    # Equal token count: only accept shorter form if it is a decoration strip of draft.
     if len(r.split()) == len(d.split()) and len(r) < len(d):
         compact_draft = d.replace("$", "").replace(",", "")
         if r in compact_draft:
+            return r
+    # Explicit wrong-value reflections: allow equal-length corrections.
+    if re.search(r"wrong value|incorrect|not the (?:right|correct)", reflection, re.I):
+        if len(r.split()) <= len(d.split()) + 1:
             return r
     return d
 
@@ -173,11 +180,14 @@ def run_v0_loop(
                 )
     # P8 is gated: only expose python_repl on code-category tasks to avoid
     # word-problem regressions (math/file/long-horizon) seen on the mini suite.
-    use_repl = flags.is_on("P8") and (category or "").lower() == "code"
+    use_repl = flags.is_on("P8") and (
+        (category or "").lower() == "code"
+        or ((category or "").lower() == "long_horizon" and is_sequence_task(prompt))
+    )
     repl = PersistentPythonREPL() if use_repl else None
     extra_tools = (make_python_repl_tool(repl),) if repl is not None else None
     if flags.is_on("P4"):
-        selected = tools_for_category(category, extra=extra_tools)
+        selected = tools_for_category(category, extra=extra_tools, prompt=prompt)
         registry = tool_registry(tools=selected) if selected else {}
         if selected:
             tool_msg = render_tool_definitions(tools=selected)
@@ -287,7 +297,7 @@ def run_v0_loop(
         if flags.is_on("P6"):
             retried = self_refine(client, prompt, retried)
         messages.append(Message(role="assistant", content=f"P7_RETRY: {retried}"))
-        answer = _prefer_retry(prompt, answer, retried)
+        answer = _prefer_retry(prompt, answer, retried, reflection=reflection)
     elapsed = time.perf_counter() - t0
 
     return Trajectory(

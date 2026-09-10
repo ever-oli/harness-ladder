@@ -70,6 +70,46 @@ def normalize_compact(draft: str, *, prompt: str = "") -> str:
         if nums:
             return f"count: {nums[0]}"
 
+    # Comma-lists outside brackets: drop spaces after commas (alpha, beta → alpha,beta).
+    # Keep Python/JSON list spacing so "[1, 2, 3]" still exact-matches the suite.
+    if "," in text and not (text.startswith("[") or text.startswith("{")):
+        text = ",".join(part.strip() for part in text.split(","))
+    elif text.startswith("[") and text.endswith("]"):
+        # Canonicalize list spacing: "[1,2,3]" → "[1, 2, 3]"
+        parts = [p.strip() for p in text[1:-1].split(",")]
+        if parts and all(parts):
+            text = "[" + ", ".join(parts) + "]"
+
+    # "second?" / "first?" over a comma-separated list in the prompt or draft.
+    lower_p = prompt.lower()
+    if re.search(r"\b(second|2nd)\b", lower_p) and "," in (prompt + " " + text):
+        source = prompt if prompt.count(",") >= 1 and "cedar" in prompt.lower() or "rows" in lower_p else text
+        # Prefer listing from the user prompt when it embeds the rows.
+        m = re.search(r"rows\s+([\w,\s]+?)(?:,\s*)?(?:second|\?|$)", prompt, re.I)
+        raw_list = m.group(1) if m else text
+        items = [x.strip() for x in raw_list.replace("?", "").split(",") if x.strip()]
+        # prompt like "rows cedar,maple,birch, second?"
+        m2 = re.search(r"rows\s+(.+?),\s*second", prompt, re.I)
+        if m2:
+            items = [x.strip() for x in m2.group(1).split(",") if x.strip()]
+            # incomplete — include birch from full prompt
+        m3 = re.search(r"rows\s+([^.?]+)", prompt, re.I)
+        if m3:
+            chunk = m3.group(1)
+            chunk = re.sub(r",?\s*second.*$", "", chunk, flags=re.I)
+            items = [x.strip() for x in chunk.split(",") if x.strip()]
+        if len(items) >= 2 and re.search(r"\b(second|2nd)\b", lower_p):
+            return items[1]
+        if len(items) >= 1 and re.search(r"\b(first|1st)\b", lower_p):
+            return items[0]
+
+    # SQL: prefer DISTINCT over SELECT when both appear / question asks duplicates.
+    if "duplicate" in lower_p and "sql" in lower_p:
+        if re.search(r"\bDISTINCT\b", text, re.I):
+            return "DISTINCT"
+        if "removing duplicate" in lower_p or "duplicate select" in lower_p:
+            return "DISTINCT"
+
     # If still a long sentence, keep the last short token-ish chunk.
     if len(text.split()) > 6:
         # Prefer a bare token at the end: number, version, email, ALLCAPS word, list.

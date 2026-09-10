@@ -10,15 +10,26 @@ _FEW_SHOT_EXAMPLES: dict[str, tuple[tuple[str, str], ...]] = {
         ("Calculate 3 + 4. Give only the final number.", "7"),
         ("5 pages for 3 days? total pages number only", "15"),
     ),
-    "code": (("Evaluate print(2 + 3). Give only the final number.", "5"),),
-    "tool": (("calculator 2 + 2 final number", "4"),),
+    "code": (
+        ("Evaluate print(2 + 3). Give only the final number.", "5"),
+        ("SQL keyword removing duplicate SELECT rows?", "DISTINCT"),
+        ("After [0,1].append(2), list?", "[0, 1, 2]"),
+    ),
+    "tool": (
+        ("tool temperature 19 C, report number", "19"),
+        ("confirmed operation archive, name only", "archive"),
+        ("database rows foo,bar, both names", "foo,bar"),
+    ),
     "file": (
         ("owners.txt says owner = Ada Lovelace, name?", "Ada"),
         ("config.toml port = 9000, what port?", "9000"),
+        ("rows oak,pine,elm, second?", "pine"),
     ),
     "long": (
         ("visit X then Y then Z, last?", "Z"),
         ("start 2, double, add 1, final?", "5"),
+        ("reverse east", "tsae"),
+        ("first letters cat dog elk", "CDE"),
     ),
 }
 _GENERIC_EXAMPLES = (

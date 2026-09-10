@@ -196,6 +196,7 @@ def tools_for_category(
     category: str | None = None,
     *,
     extra: tuple[ToolSpec, ...] | None = None,
+    prompt: str = "",
 ) -> tuple[ToolSpec, ...]:
     """Filter default tools by task family (reduces wrong-tool procedural failures).
 
@@ -205,16 +206,21 @@ def tools_for_category(
     """
     cat = (category or "").lower()
     allow = {spec.name for spec in DEFAULT_TOOLS}
+    lower = (prompt or "").lower()
     if cat == "file":
         allow = set()  # no tools — answer from retrieved passages only
     elif cat == "math":
         allow = {"calculator"}
     elif cat == "long_horizon":
+        # String transforms use python_repl (via extra); arithmetic keeps calculator.
         allow = {"calculator"}
     elif cat == "code":
         allow = {"calculator"}  # python_repl added via extra when P8 gated on
     elif cat == "tool":
         allow = {spec.name for spec in DEFAULT_TOOLS}
+        # Don't offer calculator unless the prompt clearly asks to compute.
+        if not re.search(r"calculator|\d+\s*[+\-*/]\s*\d+", lower):
+            allow.discard("calculator")
     specs = tuple(spec for spec in DEFAULT_TOOLS if spec.name in allow)
     if extra:
         specs = specs + tuple(extra)
