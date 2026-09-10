@@ -88,6 +88,14 @@ def _prefer_retry(prompt: str, draft: str, retried: str, *, reflection: str = ""
             return r
     if re.search(r"wrong value|incorrect|not the (?:right|correct)", reflection, re.I):
         if len(r.split()) <= len(d.split()) + 1:
+            # Never let Reflexion flip one bare number into a different bare number
+            # (seen: calculator returned 4 → Final Answer 4 → P7_RETRY 16).
+            if (
+                re.fullmatch(r"-?\d+(?:\.\d+)?", d)
+                and re.fullmatch(r"-?\d+(?:\.\d+)?", r)
+                and d != r
+            ):
+                return d
             return r
     # Incomplete draft: reflection says missing another part — allow a still-compact longer retry.
     if re.search(r"miss(?:es|ing)|incomplete|other name|both", reflection, re.I):
@@ -317,7 +325,21 @@ def run_v0_loop(
         if refined != answer:
             messages.append(Message(role="assistant", content=f"P6_REFINED: {refined}"))
         answer = refined
-    if flags.is_on("P7"):
+    # Skip Reflexion when the draft already equals the last tool observation
+    # (tool-verified answers; P7 has been flipping 4→16 on long-horizon arithmetic).
+    skip_p7 = False
+    if flags.is_on("P4"):
+        ans_n = normalize_compact(_finalize_answer(answer, flags), prompt=prompt)
+        for msg in reversed(messages):
+            if msg.role == "user" and "<tool_response>" in (msg.content or ""):
+                m = re.search(r"<tool_response>\s*([^<]+?)\s*</tool_response>", msg.content, re.I | re.S)
+                if m:
+                    obs = normalize_compact(m.group(1).strip(), prompt=prompt)
+                    if obs and ans_n == obs and re.fullmatch(r"-?\d+(?:\.\d+)?", ans_n or ""):
+                        skip_p7 = True
+                break
+
+    if flags.is_on("P7") and not skip_p7:
         reflection = reflect(client, prompt, answer)
         messages.append(Message(role="assistant", content=f"P7_REFLECTION: {reflection}"))
         retried = retry_with_reflection(client, prompt, answer, reflection)
