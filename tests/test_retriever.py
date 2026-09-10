@@ -19,7 +19,7 @@ def test_retrieve_is_bounded_and_deterministic():
 
 def test_corpus_loading_and_rendering():
     chunks = load_corpus("corpus/task_passages.md")
-    assert len(chunks) == 5
+    assert len(chunks) == 10
     rendered = render_context(retrieve("cache DEFAULT_TTL", chunks, top_k=1))
     assert "DEFAULT_TTL = 900" in rendered
     assert "scratch work" in rendered

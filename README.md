@@ -112,3 +112,7 @@ Against the 5 held-out mini-suite fails, online harness guidance + traces pointe
 Mitigations: category-matched few-shots, category tool filters + file read-gate, plan-once nudge for math/long_horizon, better calculator hints.
 
 **Cleared:** `long_horizon_01`/`03` fixed by forced full-expression calculator gate → mini suite **24/24**.
+
+## Suite expansion
+
+After mini-suite 24/24, measuring on `tasks/suite_v1.json` (48 tasks). Corpus expanded for new file-grounded items.

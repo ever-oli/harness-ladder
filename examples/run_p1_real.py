@@ -38,8 +38,8 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    if args.rung not in (1, 2, 3, 4, 5, 6, 7, 8):
-        raise SystemExit("This runner supports cumulative rungs 1-8 (P1-P8).")
+    if args.rung not in (0, 1, 2, 3, 4, 5, 6, 7, 8):
+        raise SystemExit("This runner supports cumulative rungs 0-8 (P0-P8).")
     config = ModelConfig(model_id=args.model_id, base_url=args.base_url, seed=args.seed, max_tokens=128)
     summary = run_suite(
         rung=args.rung,

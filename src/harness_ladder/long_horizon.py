@@ -39,16 +39,27 @@ def suggest_expression(prompt: str) -> str | None:
         add, *nums = m.groups()
         return f"{nums[-1]}+{add}"
 
-    # visit A then B then C, last
-    m = re.search(r"visit\s+(\w+)(?:\s+then\s+(\w+))+.*last", text, re.I)
+    # a+b, times c, divided by d
+    m = re.search(
+        r"(\d+)\s*\+\s*(\d+).*times\s+(\d+).*divided by\s+(\d+)",
+        text,
+        re.I | re.S,
+    )
     if m:
-        parts = re.findall(r"then\s+(\w+)|visit\s+(\w+)", text, re.I)
-        sequence = [a or b for a, b in parts]
-        if sequence:
-            # Not arithmetic — caller should not force calculator.
-            return None
+        a, b, c, d = m.groups()
+        return f"(({a}+{b})*{c})/{d}"
+
+    # visit A then B then C, last — not arithmetic
+    if re.search(r"visit\s+\w+\s+then", text, re.I):
+        return None
     return None
 
 
 def is_sequence_task(prompt: str) -> bool:
-    return bool(re.search(r"visit\s+\w+\s+then", (prompt or "").lower()))
+    """True when the task is not a calculator-forced arithmetic chain."""
+    lower = (prompt or "").lower()
+    if re.search(r"visit\s+\w+\s+then", lower):
+        return True
+    if any(k in lower for k in ("reverse ", "first letters", "uppercase", "season after")):
+        return True
+    return False
