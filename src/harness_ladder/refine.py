@@ -58,6 +58,12 @@ def normalize_compact(draft: str, *, prompt: str = "") -> str:
         if len(nums) >= 2:
             return " ".join(nums)
 
+    # "report number" / temperature N C — prefer the number stated in the prompt.
+    if ("report number" in lower_p or ("temperature" in lower_p and "report" in lower_p)):
+        nums = _INT_RE.findall(prompt)
+        if nums:
+            return nums[0]
+
     # Numeric asks: keep the first plausible number token (drop units).
     if any(k in lower_p for k in ("speed", "how many", "retries", "port", "ttl", "final?", "number")):
         nums = _INT_RE.findall(text)

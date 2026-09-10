@@ -65,8 +65,9 @@ def _p2_answer_only(text: str) -> str:
 def _prefer_retry(prompt: str, draft: str, retried: str, *, reflection: str = "") -> str:
     """Keep Reflexion retries from expanding answers — but accept real corrections.
 
-    Reject unit/$ expansions. Accept retries when the draft is XML garbage or the
-    reflection flags a wrong value (equal-length token swaps like confirmed→delete).
+    Reject unit/$ expansions. Accept retries when the draft is XML garbage, the
+    reflection flags a wrong value, or a short draft is a proper prefix of a
+    still-compact retry (e.g. R → ROB for first-letters tasks).
     """
     if not retried:
         return draft
@@ -76,7 +77,6 @@ def _prefer_retry(prompt: str, draft: str, retried: str, *, reflection: str = ""
         return d
     if r == d:
         return r
-    # Draft looks like broken tool/XML residue.
     low = d.lower()
     if "]]>" in d or "<function" in low or 'name="' in d or "<param" in low:
         return r
@@ -86,10 +86,19 @@ def _prefer_retry(prompt: str, draft: str, retried: str, *, reflection: str = ""
         compact_draft = d.replace("$", "").replace(",", "")
         if r in compact_draft:
             return r
-    # Explicit wrong-value reflections: allow equal-length corrections.
     if re.search(r"wrong value|incorrect|not the (?:right|correct)", reflection, re.I):
         if len(r.split()) <= len(d.split()) + 1:
             return r
+    # Compact upgrade: single-token draft is a proper prefix of single-token retry.
+    if (
+        len(d.split()) == 1
+        and len(r.split()) == 1
+        and len(r) <= 8
+        and d
+        and r.upper().startswith(d.upper())
+        and len(r) > len(d)
+    ):
+        return r
     return d
 
 
