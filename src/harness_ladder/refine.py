@@ -58,6 +58,20 @@ def normalize_compact(draft: str, *, prompt: str = "") -> str:
         if len(nums) >= 2:
             return " ".join(nums)
 
+    # Deterministic string transforms stated entirely in the prompt.
+    m = re.match(r"reverse\s+(\w+)\s*$", prompt.strip(), re.I)
+    if m:
+        return m.group(1)[::-1]
+    m = re.match(r"first letters\s+(.+)$", prompt.strip(), re.I)
+    if m:
+        words = m.group(1).split()
+        if words:
+            return "".join(w[0].upper() for w in words if w)
+    m = re.search(r"'([^']*)'\[(\d+):(\d+)\]", prompt)
+    if m:
+        s, a, b = m.group(1), int(m.group(2)), int(m.group(3))
+        return s[a:b]
+
     # "report number" / temperature N C — prefer the number stated in the prompt.
     if ("report number" in lower_p or ("temperature" in lower_p and "report" in lower_p)):
         nums = _INT_RE.findall(prompt)

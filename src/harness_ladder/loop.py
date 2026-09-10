@@ -89,6 +89,10 @@ def _prefer_retry(prompt: str, draft: str, retried: str, *, reflection: str = ""
     if re.search(r"wrong value|incorrect|not the (?:right|correct)", reflection, re.I):
         if len(r.split()) <= len(d.split()) + 1:
             return r
+    # Incomplete draft: reflection says missing another part — allow a still-compact longer retry.
+    if re.search(r"miss(?:es|ing)|incomplete|other name|both", reflection, re.I):
+        if len(r) <= 40 and len(r.split()) <= 4 and len(r) > len(d):
+            return r
     # Compact upgrade: single-token draft is a proper prefix of single-token retry.
     if (
         len(d.split()) == 1
@@ -255,7 +259,22 @@ def run_v0_loop(
             and suggested is not None
         )
         if needs_calc and not calls and rounds > 0:
-            # Refuse premature Final Answer / bare number — force tool hop.
+            # If the model already emitted the calculator result, accept it.
+            prelim = _extract_final_answer(raw) or raw
+            prelim_n = normalize_compact(prelim, prompt=prompt)
+            try:
+                calc_call = next(
+                    c for c in parse_tool_calls(
+                        f'<function name="calculator"><param name="expression">{suggested}</param></function>'
+                    )
+                )
+                calc_out = str(execute_tool_call(calc_call, registry)).strip()
+            except Exception:
+                calc_out = ""
+            if calc_out and prelim_n == normalize_compact(calc_out, prompt=prompt):
+                answer = prelim_n
+                break
+            # Refuse premature wrong Final Answer — force tool hop.
             messages.append(
                 Message(
                     role="user",

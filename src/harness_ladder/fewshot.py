@@ -14,6 +14,7 @@ _FEW_SHOT_EXAMPLES: dict[str, tuple[tuple[str, str], ...]] = {
         ("Evaluate print(2 + 3). Give only the final number.", "5"),
         ("SQL keyword removing duplicate SELECT rows?", "DISTINCT"),
         ("After [0,1].append(2), list?", "[0, 1, 2]"),
+        ("'abc'[1:3]?", "bc"),
     ),
     "tool": (
         ("tool temperature 19 C, report number", "19"),

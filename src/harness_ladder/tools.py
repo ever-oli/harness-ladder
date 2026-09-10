@@ -212,8 +212,13 @@ def tools_for_category(
     elif cat == "math":
         allow = {"calculator"}
     elif cat == "long_horizon":
-        # String transforms use python_repl (via extra); arithmetic keeps calculator.
-        allow = {"calculator"}
+        # Arithmetic chains keep calculator; string/sequence tasks use only python_repl (extra).
+        if any(k in lower for k in ("reverse ", "first letters", "uppercase", "season after")) or re.search(
+            r"visit\s+\w+\s+then", lower
+        ):
+            allow = set()
+        else:
+            allow = {"calculator"}
     elif cat == "code":
         allow = {"calculator"}  # python_repl added via extra when P8 gated on
     elif cat == "tool":
@@ -331,7 +336,18 @@ def infer_tool_hint(prompt: str, *, python_repl: bool = False) -> str | None:
     lower = prompt.lower()
     if python_repl and any(
         k in lower
-        for k in ("sorted(", "range(", "len(", ".upper(", "print(", "__")
+        for k in (
+            "sorted(",
+            "range(",
+            "len(",
+            ".upper(",
+            "print(",
+            "__",
+            "[",
+            "reverse ",
+            "first letters",
+            "append(",
+        )
     ):
         return "Prefer the python_repl tool for code execution; state persists across calls."
     if "pages" in lower and "days" in lower:
