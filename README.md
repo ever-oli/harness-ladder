@@ -77,15 +77,15 @@ See [CLOUD_PLAN.md](CLOUD_PLAN.md) and [github.com/ever-oli/harness-ladder](http
 | Mini v1 / P5 | 15/24 | 62.5% | +0.0 pp | cumulative ReAct; results/runs/p5_real_minicpm5_mini_v1.json |
 | Mini v1 / P6 | 19/24 | 79.2% | **+16.7 pp** | self-refine (post-debug); results/runs/p6_real_minicpm5_mini_v1.json |
 | Mini v1 / P7 | 19/24 | 79.2% | +0.0 pp | Reflexion FIXED (compact-only accept); results/runs/p7_real_minicpm5_mini_v1.json |
-| Mini v1 / P8 | 19/24 | 79.2% | **+0.0 pp** | REPL gated to code-only; results/runs/p8_real_minicpm5_mini_v1.json |
+| Mini v1 / P8 | 22/24 | 91.7% | **+12.5 pp** | research fixes (few-shot/RAG gate/plan-once); results/runs/p8_real_minicpm5_mini_v1.json |
 
 P3 adds top-k lexical passages from the local corpus while retaining P0-P2 behavior.
 
-P4 adds MiniCPM5-style tool definitions + one XML tool-call round (call → observe → answer). Chart (post-debug + P8 gate): 8.3→16.7→33.3→41.7→62.5→62.5→79.2→79.2→**79.2**.
+P4 adds MiniCPM5-style tool definitions + one XML tool-call round (call → observe → answer). Chart: 8.3→16.7→33.3→41.7→62.5→62.5→79.2→79.2→**91.7** (research-fix P8).
 
 P5 adds a ReAct loop (Thought → tool act → observe, up to 3 rounds) on top of P4 tools. P5 ReAct traded wins: recovered code/tool/long-horizon XML cases, but some exact-match file/math answers became verbose sentences (net flat).
 
-P6 adds self-refine (critique → compact revise) to cut verbose exact-match failures. Chart (post-debug + P8 gate): 8.3→16.7→33.3→41.7→62.5→62.5→79.2→79.2→**79.2**.
+P6 adds self-refine (critique → compact revise) to cut verbose exact-match failures. Chart: 8.3→16.7→33.3→41.7→62.5→62.5→79.2→79.2→**91.7** (research-fix P8).
 
 P7 adds Reflexion (verbal critique → one retry trial). Flat on mini suite vs P6 (same 70.8%) — retry helps less without external feedback.
 
@@ -100,7 +100,7 @@ Root causes for flat/regression after P6:
 
 Fixes: compact-only Reflexion accept, strip `$`/units in normalize, REPL print cleanup, softer REPL hints, suite regex repair.
 
-**Re-eval after fixes:** P6 **19/24 (79.2%)**, P7 **19/24 (79.2%)**. **P8 code-gated:** **19/24 (79.2%)** — matches peak (ungated was 70.8%).
+**Re-eval after fixes:** P6 **19/24 (79.2%)**, P7 **19/24 (79.2%)**. **P8 code-gated:** was **19/24 (79.2%)**; after remaining-fail research fixes → **22/24 (91.7%)**.
 
 ## Remaining-fail debug (web research)
 
@@ -110,3 +110,5 @@ Against the 5 held-out mini-suite fails, online harness guidance + traces pointe
 3. **ReAct early stop on plannable math** — partial calculator hops (`1+10`) vs plan-once full expression (small-model ReAct literature).
 
 Mitigations: category-matched few-shots, category tool filters + file read-gate, plan-once nudge for math/long_horizon, better calculator hints.
+
+**Held-out after research fixes:** `long_horizon_01`, `long_horizon_03` still fail (partial multi-step calculator).
