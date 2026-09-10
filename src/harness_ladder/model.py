@@ -99,6 +99,12 @@ class MockLLM:
         if code:
             return str(int(code.group(1)) + int(code.group(2)))
 
+        # Long-horizon forced calculator
+        gate = re.search(r"Use this full expression in one call:\s*([^.\n]+)", system_blob)
+        if gate and "calculator" in system_blob.lower() and "<tool_response>" not in user_text:
+            expr = gate.group(1).strip()
+            return f'<function name="calculator"><param name="expression">{expr}</param></function>'
+
         if tools_enabled:
             lower = user_text.lower()
             system_blob = "\n".join(m.content for m in messages if m.role == "system")

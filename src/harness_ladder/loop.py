@@ -24,6 +24,7 @@ from harness_ladder.tools import (
     tool_registry,
     tools_for_category,
 )
+from harness_ladder.long_horizon import is_sequence_task, suggest_expression
 from harness_ladder.refine import normalize_compact, self_refine
 from harness_ladder.reflexion import reflect, retry_with_reflection
 from harness_ladder.types import Message, Trajectory
@@ -192,6 +193,21 @@ def run_v0_loop(
     else:
         registry = {}
 
+    suggested = None
+    if (category or "").lower() == "long_horizon" and not is_sequence_task(prompt):
+        suggested = suggest_expression(prompt)
+        if suggested and flags.is_on("P4"):
+            messages.append(
+                Message(
+                    role="system",
+                    content=(
+                        "Long-horizon tool gate: you MUST call calculator before Final Answer. "
+                        f"Use this full expression in one call: {suggested}. "
+                        "Do not emit a bare number first."
+                    ),
+                )
+            )
+
     messages.append(Message(role="user", content=prompt))
 
     t0 = time.perf_counter()
@@ -212,12 +228,35 @@ def run_v0_loop(
         raw = client.complete(messages).strip()
         messages.append(Message(role="assistant", content=raw))
 
-        if flags.is_on("P5") and _extract_final_answer(raw) is not None:
+        calls = parse_tool_calls(raw) if flags.is_on("P4") else []
+        needs_calc = (
+            (category or "").lower() == "long_horizon"
+            and not is_sequence_task(prompt)
+            and flags.is_on("P4")
+            and suggested is not None
+        )
+        if needs_calc and not calls and rounds > 0:
+            # Refuse premature Final Answer / bare number — force tool hop.
+            messages.append(
+                Message(
+                    role="user",
+                    content=(
+                        "<tool_response>\n"
+                        "Error: calculator required. Call "
+                        f'<function name="calculator"><param name="expression">{suggested}</param></function>\n'
+                        "</tool_response>\n"
+                        "Continue ReAct. Use Final Answer: when done."
+                    ),
+                )
+            )
+            rounds -= 1
+            continue
+
+        if flags.is_on("P5") and _extract_final_answer(raw) is not None and not (needs_calc and not calls):
             answer = raw
             break
 
         if flags.is_on("P4"):
-            calls = parse_tool_calls(raw)
             if calls and rounds > 0:
                 # Execute all parsed calls this turn (usually one); feed observations.
                 observations = []
