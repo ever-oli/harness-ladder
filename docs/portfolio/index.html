@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Harness Ladder — Ever Olivares</title>
+  <meta name="description" content="Fixed MiniCPM5-2B weights; cumulative harness powers P0–P8. Marginal-gain charts on custom and paper suites." />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #121821;
+      --text: #e7eef7;
+      --muted: #8b9bb0;
+      --accent: #5b9fd4;
+      --good: #3ecf8e;
+      --warn: #e6b84d;
+      --line: #1e2836;
+      --font: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: radial-gradient(1200px 600px at 10% -10%, #152033 0%, var(--bg) 55%);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    header h1 { font-size: clamp(1.75rem, 4vw, 2.4rem); margin: 0 0 0.4rem; letter-spacing: -0.02em; }
+    header .sub { color: var(--muted); margin: 0 0 1.5rem; max-width: 42rem; }
+    .badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--good);
+      border: 1px solid #2a5a44;
+      background: #0f241c;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+    .grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+    @media (min-width: 720px) { .grid.two { grid-template-columns: 1fr 1fr; } }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.1rem 1.2rem 1.25rem;
+    }
+    .card h2 { margin: 0 0 0.35rem; font-size: 1.05rem; }
+    .card p.note { margin: 0 0 0.85rem; color: var(--muted); font-size: 0.9rem; }
+    canvas { width: 100% !important; max-height: 280px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th, td { text-align: left; padding: 0.45rem 0.4rem; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-weight: 500; }
+    td.num { font-family: var(--mono); }
+    .good { color: var(--good); }
+    .warn { color: var(--warn); }
+    .powers { display: grid; gap: 0.45rem; grid-template-columns: 1fr 1fr; }
+    @media (min-width: 640px) { .powers { grid-template-columns: 1fr 1fr 1fr; } }
+    .power {
+      font-size: 0.85rem;
+      padding: 0.5rem 0.65rem;
+      border-radius: 10px;
+      background: #0d131c;
+      border: 1px solid var(--line);
+    }
+    .power strong { font-family: var(--mono); color: var(--accent); }
+    footer { margin-top: 2.5rem; color: var(--muted); font-size: 0.85rem; }
+    ul.findings { margin: 0.4rem 0 0; padding-left: 1.1rem; color: var(--text); }
+    ul.findings li { margin: 0.35rem 0; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="badge">weights fixed · harness moves</div>
+      <h1>Harness Ladder</h1>
+      <p class="sub">
+        Cumulative agent powers (P0–P8) on a frozen <code>openbmb/MiniCPM5-2B</code>.
+        Same model, same suites — measure what each harness paper actually buys on free T4 GPUs.
+        By <strong>Ever Olivares</strong>.
+      </p>
+      <p class="sub" style="margin-top:-0.75rem">
+        <a href="https://github.com/ever-oli/harness-ladder">GitHub repo</a>
+        · <a href="../writeup.md">Technical writeup</a>
+        · <a href="https://academy.dair.ai/papers/collections/harness-engineering">DAIR harness collection</a>
+      </p>
+    </header>
+
+    <section class="grid two" style="margin-bottom:1rem">
+      <div class="card">
+        <h2>suite_v1 — full ladder</h2>
+        <p class="note">48 custom exact-match tasks. Saturates at P7.</p>
+        <canvas id="chartV1" height="220"></canvas>
+      </div>
+      <div class="card">
+        <h2>suite_v2 — paper mix</h2>
+        <p class="note">64 tasks: GSM8K + BBH + MBPP (seed 42). Endpoints only so far.</p>
+        <canvas id="chartV2" height="220"></canvas>
+      </div>
+    </section>
+
+    <section class="card" style="margin-bottom:1rem">
+      <h2>Key findings</h2>
+      <ul class="findings">
+        <li><strong>Harness alone moves the needle.</strong> suite_v1: 6.3% → 100% without touching weights.</li>
+        <li><strong>Few-shot is the first cliff.</strong> P0→P1 jumps +62 pp on suite_v1.</li>
+        <li><strong>Tools ≠ magic.</strong> P4 is flat vs P3 on suite_v1; ReAct (P5) and self-refine (P6) matter more here.</li>
+        <li><strong>Easy suites lie.</strong> After 100% on suite_v1, paper suite_v2 peaks at 48.4% (P7).</li>
+        <li><strong>Negative result:</strong> P8 gated REPL regresses (−7.8 pp) on suite_v2 vs P7 — MiniCPM emits broken tool XML on full MBPP implement prompts.</li>
+      </ul>
+    </section>
+
+    <section class="grid two" style="margin-bottom:1rem">
+      <div class="card">
+        <h2>suite_v1 scores</h2>
+        <table>
+          <thead><tr><th>Rung</th><th>Passed</th><th>Score</th></tr></thead>
+          <tbody id="tableV1"></tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h2>suite_v2 scores</h2>
+        <table>
+          <thead><tr><th>Rung</th><th>Passed</th><th>Score</th></tr></thead>
+          <tbody id="tableV2"></tbody>
+        </table>
+        <p class="note" style="margin-top:0.75rem">Mid-rungs + P8 fix re-eval paused (Lightning credits).</p>
+      </div>
+    </section>
+
+    <section class="card" style="margin-bottom:1rem">
+      <h2>Powers (cumulative)</h2>
+      <p class="note">Each rung adds one flag; earlier powers stay on.</p>
+      <div class="powers" id="powers"></div>
+    </section>
+
+    <footer>
+      Free compute: Lightning AI T4 · Exact-match grading · Ledger in
+      <code>results/ledger.csv</code>. This page reads <code>chart-data.json</code> only — no model inference in-browser.
+    </footer>
+  </div>
+
+  <script>
+    async function main() {
+      const res = await fetch('chart-data.json');
+      const data = await res.json();
+
+      const pct = (s) => (s * 100).toFixed(1) + '%';
+      const mkTable = (el, rungs) => {
+        el.innerHTML = rungs.map(r => {
+          const cls = r.score >= 0.999 ? 'good' : (r.rung === 8 && r.score < 0.45 ? 'warn' : '');
+          return `<tr><td>P${r.rung}</td><td class="num">${r.passed}</td><td class="num ${cls}">${pct(r.score)}</td></tr>`;
+        }).join('');
+      };
+      mkTable(document.getElementById('tableV1'), data.suite_v1.rungs);
+      mkTable(document.getElementById('tableV2'), data.suite_v2.rungs);
+
+      document.getElementById('powers').innerHTML = data.powers.map(p =>
+        `<div class="power"><strong>${p.id}</strong> ${p.name}</div>`
+      ).join('');
+
+      const common = {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: { label: (c) => `${(c.parsed.y * 100).toFixed(1)}%` }
+          }
+        },
+        scales: {
+          y: {
+            min: 0, max: 1,
+            ticks: { color: '#8b9bb0', callback: (v) => (v * 100) + '%' },
+            grid: { color: '#1e2836' }
+          },
+          x: {
+            ticks: { color: '#8b9bb0' },
+            grid: { display: false }
+          }
+        }
+      };
+
+      const line = (id, suite, color) => {
+        const labels = suite.rungs.map(r => 'P' + r.rung);
+        const scores = suite.rungs.map(r => r.score);
+        new Chart(document.getElementById(id), {
+          type: 'line',
+          data: {
+            labels,
+            datasets: [{
+              data: scores,
+              borderColor: color,
+              backgroundColor: color + '33',
+              fill: true,
+              tension: 0.25,
+              pointRadius: 4,
+              pointBackgroundColor: color,
+            }]
+          },
+          options: common
+        });
+      };
+      line('chartV1', data.suite_v1, '#3ecf8e');
+      line('chartV2', data.suite_v2, '#5b9fd4');
+    }
+    main().catch(console.error);
+  </script>
+</body>
+</html>

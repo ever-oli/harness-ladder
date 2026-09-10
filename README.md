@@ -113,6 +113,16 @@ Mitigations: category-matched few-shots, category tool filters + file read-gate,
 
 **Cleared:** `long_horizon_01`/`03` fixed by forced full-expression calculator gate → mini suite **24/24**.
 
+
+## Portfolio
+
+Static charts + writeup (no in-browser model):
+
+- **[Portfolio page](./docs/portfolio/index.html)** — suite_v1 / suite_v2 ladders
+- **[Writeup](./docs/writeup.md)** — method, findings, P8 REPL negative result
+
+Open the HTML locally (GitHub’s file view will not run Chart.js fetch); or serve `docs/portfolio` with any static file server.
+
 ## Evaluation — suite_v1 (48 tasks)
 
 Full ladder on fixed `openbmb/MiniCPM5-2B` weights:

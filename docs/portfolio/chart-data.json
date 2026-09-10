@@ -1,0 +1,119 @@
+{
+  "model": "openbmb/MiniCPM5-2B",
+  "suite_v1": {
+    "n": 48,
+    "label": "suite_v1 (48 custom)",
+    "rungs": [
+      {
+        "rung": 0,
+        "score": 0.0625,
+        "passed": "3/48"
+      },
+      {
+        "rung": 1,
+        "score": 0.6875,
+        "passed": "33/48"
+      },
+      {
+        "rung": 2,
+        "score": 0.7292,
+        "passed": "35/48"
+      },
+      {
+        "rung": 3,
+        "score": 0.75,
+        "passed": "36/48"
+      },
+      {
+        "rung": 4,
+        "score": 0.75,
+        "passed": "36/48"
+      },
+      {
+        "rung": 5,
+        "score": 0.8542,
+        "passed": "41/48"
+      },
+      {
+        "rung": 6,
+        "score": 0.9583,
+        "passed": "46/48"
+      },
+      {
+        "rung": 7,
+        "score": 1.0,
+        "passed": "48/48"
+      },
+      {
+        "rung": 8,
+        "score": 1.0,
+        "passed": "48/48"
+      }
+    ]
+  },
+  "suite_v2": {
+    "n": 64,
+    "label": "suite_v2 (64 paper mix)",
+    "papers": [
+      "GSM8K (Cobbe+21)",
+      "BBH (Suzgun+22)",
+      "MBPP (Austin+21)"
+    ],
+    "rungs": [
+      {
+        "rung": 0,
+        "score": 0.1875,
+        "passed": "12/64"
+      },
+      {
+        "rung": 7,
+        "score": 0.4844,
+        "passed": "31/64"
+      },
+      {
+        "rung": 8,
+        "score": 0.4062,
+        "passed": "26/64"
+      }
+    ],
+    "note": "P2\u2013P6 pending; Lightning credits exhausted mid re-eval"
+  },
+  "powers": [
+    {
+      "id": "P0",
+      "name": "Bare loop"
+    },
+    {
+      "id": "P1",
+      "name": "Few-shot"
+    },
+    {
+      "id": "P2",
+      "name": "Budgeted thinking"
+    },
+    {
+      "id": "P3",
+      "name": "Lexical RAG"
+    },
+    {
+      "id": "P4",
+      "name": "Tools (MiniCPM XML)"
+    },
+    {
+      "id": "P5",
+      "name": "ReAct"
+    },
+    {
+      "id": "P6",
+      "name": "Self-refine"
+    },
+    {
+      "id": "P7",
+      "name": "Reflexion"
+    },
+    {
+      "id": "P8",
+      "name": "Gated Python REPL"
+    }
+  ]
+}
