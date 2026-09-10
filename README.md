@@ -115,15 +115,21 @@ Mitigations: category-matched few-shots, category tool filters + file read-gate,
 
 ## Evaluation — suite_v1 (48 tasks)
 
-Chart: P0 **6.3%** → P2 **72.9%** → P4 **75.0%** → P6 **95.8%** → P8 **100%** on fixed `openbmb/MiniCPM5-2B` weights.
+Full ladder on fixed `openbmb/MiniCPM5-2B` weights:
 
-| Suite / rung | Passed | Score | Notes |
+| Rung | Passed | Score | Notes |
 |---|---:|---:|---|
-| suite_v1 / P0 | 3/48 | 6.3% | bare loop |
-| suite_v1 / P2 | 35/48 | 72.9% | few-shot + budgeted thinking |
-| suite_v1 / P4 | 36/48 | 75.0% | + tools / ReAct path |
-| suite_v1 / P6 | 46/48 | 95.8% | + self-refine |
-| suite_v1 / P8 | 48/48 | **100%** | + Reflexion + gated REPL; `p8_real_minicpm5_suite_v1_fix3.json` |
+| P0 | 3/48 | 6.3% | bare loop |
+| P1 | 33/48 | 68.8% | + few-shot |
+| P2 | 35/48 | 72.9% | + budgeted thinking |
+| P3 | 36/48 | 75.0% | + lexical RAG |
+| P4 | 36/48 | 75.0% | + tools |
+| P5 | 41/48 | 85.4% | + ReAct |
+| P6 | 46/48 | 95.8% | + self-refine |
+| P7 | 48/48 | **100%** | + Reflexion |
+| P8 | 48/48 | **100%** | + gated python_repl |
 
-suite_v1 P8 saturated at **48/48 (100%)** (same MiniCPM5-2B weights; harness-only climb from P0 6.3%).
+Chart: **6.3 → 68.8 → 72.9 → 75.0 → 75.0 → 85.4 → 95.8 → 100 → 100**.
+
+suite_v1 saturates at P7/P8 (**48/48**). Biggest jumps: P0→P1 (few-shot) and P5→P6 (self-refine). Tools alone (P4) flat vs P3 on this suite.
 
