@@ -143,4 +143,13 @@ Harder ruler after suite_v1 saturated. Fixed seed `42` samples from:
 | BIG-Bench Hard | 24 | Suzgun et al. 2022 (arXiv:2210.09261) |
 | MBPP | 16 | Austin et al. 2021 (arXiv:2108.07732) |
 
-Rebuild: `python scripts/build_suite_v2.py` (needs `datasets`). Chart endpoints TBD (P0 / P7 / P8).
+Rebuild: `python scripts/build_suite_v2.py` (needs `datasets`).
+
+| Rung | Passed | Score | Notes |
+|---|---:|---:|---|
+| suite_v2 / P0 | 12/64 | 18.8% | bare loop |
+| suite_v2 / P7 | 31/64 | **48.4%** | Reflexion peak so far |
+| suite_v2 / P8 | 26/64 | 40.6% | REPL regresses (−7.8 pp vs P7) |
+
+Chart: **18.8 → … → 48.4 → 40.6**. Headroom restored vs suite_v1’s 100% ceiling. P8 gated REPL hurts on this mix (MBPP + numeric exact-match).
+
