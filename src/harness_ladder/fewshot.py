@@ -12,9 +12,16 @@ _FEW_SHOT_EXAMPLES: dict[str, tuple[tuple[str, str], ...]] = {
     ),
     "code": (
         ("Evaluate print(2 + 3). Give only the final number.", "5"),
-        ("SQL keyword removing duplicate SELECT rows?", "DISTINCT"),
         ("After [0,1].append(2), list?", "[0, 1, 2]"),
         ("'abc'[1:3]?", "bc"),
+        (
+            "Implement and run this Python task.
+Write a function add(a,b) that returns a+b.
+
+Then evaluate: add(2,3)
+Final Answer: the bare result only.",
+            "5",
+        ),
     ),
     "tool": (
         ("tool temperature 19 C, report number", "19"),

@@ -58,6 +58,14 @@ def normalize_compact(draft: str, *, prompt: str = "") -> str:
         if len(nums) >= 2:
             return " ".join(nums)
 
+    # BBH web-of-lies / truth chains often emit True/False instead of Yes/No.
+    if re.search(r"\b(tells the truth|lies)\b", prompt, re.I):
+        low = text.strip().lower().rstrip(".")
+        if low in {"true", "yes"}:
+            return "Yes"
+        if low in {"false", "no"}:
+            return "No"
+
     # Deterministic string transforms stated entirely in the prompt.
     m = re.match(r"reverse\s+(\w+)\s*$", prompt.strip(), re.I)
     if m:

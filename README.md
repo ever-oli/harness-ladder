@@ -151,5 +151,5 @@ Rebuild: `python scripts/build_suite_v2.py` (needs `datasets`).
 | suite_v2 / P7 | 31/64 | **48.4%** | Reflexion peak so far |
 | suite_v2 / P8 | 26/64 | 40.6% | REPL regresses (−7.8 pp vs P7) |
 
-Chart: **18.8 → … → 48.4 → 40.6**. Headroom restored vs suite_v1’s 100% ceiling. P8 gated REPL hurts on this mix (MBPP + numeric exact-match).
+Chart: **18.8 → … → 48.4 → 40.6**. Headroom restored vs suite_v1’s 100% ceiling. P8 gated REPL hurt on this mix (−7.8 pp); follow-up: skip REPL on full MBPP “Implement and run” prompts so P8 can match P7 there.
 

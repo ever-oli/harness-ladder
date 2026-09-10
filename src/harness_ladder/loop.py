@@ -201,7 +201,10 @@ def run_v0_loop(
                 )
     # P8 is gated: only expose python_repl on code-category tasks to avoid
     # word-problem regressions (math/file/long-horizon) seen on the mini suite.
-    use_repl = flags.is_on("P8") and (
+    # P8 REPL helps short snippet code; full "Implement and run" (MBPP) tasks
+    # regress on MiniCPM (broken XML / print-without-def). Keep those on P7 path.
+    implementish = "implement and run" in (prompt or "").lower()
+    use_repl = flags.is_on("P8") and not implementish and (
         (category or "").lower() == "code"
         or ((category or "").lower() == "long_horizon" and is_sequence_task(prompt))
     )
