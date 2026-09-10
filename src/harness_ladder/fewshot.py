@@ -15,11 +15,10 @@ _FEW_SHOT_EXAMPLES: dict[str, tuple[tuple[str, str], ...]] = {
         ("After [0,1].append(2), list?", "[0, 1, 2]"),
         ("'abc'[1:3]?", "bc"),
         (
-            "Implement and run this Python task.
-Write a function add(a,b) that returns a+b.
-
-Then evaluate: add(2,3)
-Final Answer: the bare result only.",
+            "Implement and run this Python task.\n"
+            "Write a function add(a,b) that returns a+b.\n\n"
+            "Then evaluate: add(2,3)\n"
+            "Final Answer: the bare result only.",
             "5",
         ),
     ),
