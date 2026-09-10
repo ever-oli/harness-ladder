@@ -1,0 +1,2945 @@
+{
+  "rung": 6,
+  "powers": "P0,P1,P2,P3,P4,P5,P6",
+  "model_id": "openbmb/MiniCPM5-2B",
+  "seed": 0,
+  "suite": "tasks/suite_v1.json",
+  "n_tasks": 48,
+  "n_success": 46,
+  "success_rate": 0.9583333333333334,
+  "avg_tokens": 1.4166666666666667,
+  "avg_wall_time_s": 0.5640048289172531,
+  "total_wall_time_s": 27.072231788028148,
+  "results": [
+    {
+      "task_id": "v1_code_01",
+      "success": true,
+      "expected": "[1, 2, 3]",
+      "actual": "[1, 2, 3]",
+      "tokens_used": 3,
+      "wall_time_s": 1.0384328669897513,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Evaluate print(2 + 3). Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "SQL keyword removing duplicate SELECT rows?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "DISTINCT",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "sorted([3,1,2])? list only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "[1, 2, 3]",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_code_02",
+      "success": true,
+      "expected": "12",
+      "actual": "12",
+      "tokens_used": 1,
+      "wall_time_s": 0.15997647699259687,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Evaluate print(2 + 3). Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "SQL keyword removing duplicate SELECT rows?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "DISTINCT",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).\n\nPrefer one calculator expression covering every step, then Final Answer.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "add(7,5) where add returns a+b? number",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "12",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_code_03",
+      "success": true,
+      "expected": "HARNESS",
+      "actual": "HARNESS",
+      "tokens_used": 1,
+      "wall_time_s": 0.196265525999479,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Evaluate print(2 + 3). Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "SQL keyword removing duplicate SELECT rows?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "DISTINCT",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "'harness'.upper()? string only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "HARNESS",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_code_04",
+      "success": true,
+      "expected": "1 2 3",
+      "actual": "1 2 3",
+      "tokens_used": 3,
+      "wall_time_s": 0.33532606399967335,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Evaluate print(2 + 3). Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "SQL keyword removing duplicate SELECT rows?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "DISTINCT",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "range(1,4) prints which numbers? space-separated",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "1 2 3",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_code_05",
+      "success": true,
+      "expected": "2",
+      "actual": "2",
+      "tokens_used": 1,
+      "wall_time_s": 0.15023787500103936,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Evaluate print(2 + 3). Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "SQL keyword removing duplicate SELECT rows?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "DISTINCT",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "len({'a':1,'b':2})? number",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "2",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_code_06",
+      "success": true,
+      "expected": "True",
+      "actual": "True",
+      "tokens_used": 1,
+      "wall_time_s": 0.15086529799737036,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Evaluate print(2 + 3). Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "SQL keyword removing duplicate SELECT rows?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "DISTINCT",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Is 14 even? True or False",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "True",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_code_07",
+      "success": true,
+      "expected": "add",
+      "actual": "add",
+      "tokens_used": 1,
+      "wall_time_s": 0.3508607679978013,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Evaluate print(2 + 3). Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "SQL keyword removing duplicate SELECT rows?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "DISTINCT",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "'ladder'[1:4]?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "\"lad\"",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "P6_REFINED: add",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_code_08",
+      "success": true,
+      "expected": "[1, 2, 3]",
+      "actual": "[1, 2, 3]",
+      "tokens_used": 3,
+      "wall_time_s": 0.5146902160049649,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Evaluate print(2 + 3). Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "SQL keyword removing duplicate SELECT rows?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "DISTINCT",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "After [1,2].append(3), list?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "[1, 2, 3]",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_code_09",
+      "success": true,
+      "expected": "18",
+      "actual": "18",
+      "tokens_used": 1,
+      "wall_time_s": 1.4237943689950043,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Evaluate print(2 + 3). Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "SQL keyword removing duplicate SELECT rows?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "DISTINCT",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).\n\nPrefer the calculator tool when arithmetic is required.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "3*(2+4)? number",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "name=\"calculator\"> name=\"expression\">3*(2+4)",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "<tool_response>\n18\n</tool_response>\nContinue ReAct. Use Final Answer: when done.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Final Answer: 18",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_code_10",
+      "success": true,
+      "expected": "DISTINCT",
+      "actual": "DISTINCT",
+      "tokens_used": 1,
+      "wall_time_s": 0.2861896649992559,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Evaluate print(2 + 3). Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "SQL keyword removing duplicate SELECT rows?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "DISTINCT",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "SQL keyword removing duplicate SELECT rows?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "DISTINCT",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_math_01",
+      "success": true,
+      "expected": "12",
+      "actual": "12",
+      "tokens_used": 1,
+      "wall_time_s": 0.1794439780060202,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Plan-once (small-model harness): for multi-step arithmetic, write ONE calculator expression that covers every step, then Final Answer with the bare number. Do not stop after the first partial hop.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Calculate 3 + 4. Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "7",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "5 pages for 3 days? total pages number only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "15",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "7 red + 5 blue balls?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "12",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_math_02",
+      "success": true,
+      "expected": "33",
+      "actual": "33",
+      "tokens_used": 1,
+      "wall_time_s": 0.1899818050005706,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Plan-once (small-model harness): for multi-step arithmetic, write ONE calculator expression that covers every step, then Final Answer with the bare number. Do not stop after the first partial hop.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Calculate 3 + 4. Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "7",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "5 pages for 3 days? total pages number only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "15",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "$40 minus $7?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "33",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_math_03",
+      "success": true,
+      "expected": "48",
+      "actual": "48",
+      "tokens_used": 1,
+      "wall_time_s": 0.1817331079946598,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Plan-once (small-model harness): for multi-step arithmetic, write ONE calculator expression that covers every step, then Final Answer with the bare number. Do not stop after the first partial hop.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Calculate 3 + 4. Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "7",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "5 pages for 3 days? total pages number only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "15",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).\n\nPrefer the calculator tool with multiplication (pages * days).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "8 pages for 6 days?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "48",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_math_04",
+      "success": true,
+      "expected": "30",
+      "actual": "30",
+      "tokens_used": 1,
+      "wall_time_s": 0.17947824799921364,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Plan-once (small-model harness): for multi-step arithmetic, write ONE calculator expression that covers every step, then Final Answer with the bare number. Do not stop after the first partial hop.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Calculate 3 + 4. Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "7",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "5 pages for 3 days? total pages number only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "15",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "60 km in 2 hours speed?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "30",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_math_05",
+      "success": true,
+      "expected": "4",
+      "actual": "4",
+      "tokens_used": 1,
+      "wall_time_s": 0.17939999800000805,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Plan-once (small-model harness): for multi-step arithmetic, write ONE calculator expression that covers every step, then Final Answer with the bare number. Do not stop after the first partial hop.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Calculate 3 + 4. Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "7",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "5 pages for 3 days? total pages number only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "15",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "24 apples / 6 children?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "4",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_math_06",
+      "success": true,
+      "expected": "36",
+      "actual": "36",
+      "tokens_used": 1,
+      "wall_time_s": 0.17985311600205023,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Plan-once (small-model harness): for multi-step arithmetic, write ONE calculator expression that covers every step, then Final Answer with the bare number. Do not stop after the first partial hop.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Calculate 3 + 4. Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "7",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "5 pages for 3 days? total pages number only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "15",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "rectangle 9 by 4 area?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "36",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_math_07",
+      "success": true,
+      "expected": "14",
+      "actual": "14",
+      "tokens_used": 1,
+      "wall_time_s": 0.18071970000164583,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Plan-once (small-model harness): for multi-step arithmetic, write ONE calculator expression that covers every step, then Final Answer with the bare number. Do not stop after the first partial hop.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Calculate 3 + 4. Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "7",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "5 pages for 3 days? total pages number only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "15",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "15 minus 4 plus 3?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "14",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_math_08",
+      "success": true,
+      "expected": "12",
+      "actual": "12",
+      "tokens_used": 1,
+      "wall_time_s": 0.19538617400394287,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Plan-once (small-model harness): for multi-step arithmetic, write ONE calculator expression that covers every step, then Final Answer with the bare number. Do not stop after the first partial hop.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Calculate 3 + 4. Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "7",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "5 pages for 3 days? total pages number only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "15",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Private local reference passages. Use them to answer the user's request;\ndo not mention this retrieval step, repeat headers, or reveal scratch work.\n[repo/README.md]\nThe worker retries failed jobs 3 times before marking a job failed.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "3 cups times 4 batches?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "12",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_math_09",
+      "success": true,
+      "expected": "55",
+      "actual": "55",
+      "tokens_used": 1,
+      "wall_time_s": 0.1829147950047627,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Plan-once (small-model harness): for multi-step arithmetic, write ONE calculator expression that covers every step, then Final Answer with the bare number. Do not stop after the first partial hop.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Calculate 3 + 4. Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "7",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "5 pages for 3 days? total pages number only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "15",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "$50 plus 10 percent tax?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "55",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_math_10",
+      "success": true,
+      "expected": "22",
+      "actual": "22",
+      "tokens_used": 1,
+      "wall_time_s": 0.1811009740049485,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Plan-once (small-model harness): for multi-step arithmetic, write ONE calculator expression that covers every step, then Final Answer with the bare number. Do not stop after the first partial hop.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "Calculate 3 + 4. Give only the final number.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "7",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "5 pages for 3 days? total pages number only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "15",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "3 rows of 8 minus 2?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "22",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_tool_01",
+      "success": true,
+      "expected": "{\"city\":\"Paris\",\"unit\":\"C\"}",
+      "actual": "{\"city\":\"Paris\",\"unit\":\"C\"}",
+      "tokens_used": 1,
+      "wall_time_s": 2.088175153010525,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "tool temperature 19 C, report number",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "19",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "confirmed operation archive, name only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "archive",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Private local reference passages. Use them to answer the user's request;\ndo not mention this retrieval step, repeat headers, or reveal scratch work.\n[repo/CHANGELOG.md]\n## 1.4.2\nThe 1.4.2 release adds deterministic request packing and a safer timeout default.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).\n\nPrefer the weather tool.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "weather request city Paris unit C, compact JSON",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "name=\"weather\"> name=\"city\">Paris name=\"unit\">C",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "<tool_response>\n{\"city\":\"Paris\",\"unit\":\"C\"}\n</tool_response>\nContinue ReAct. Use Final Answer: when done.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Final Answer: {\"city\":\"Paris\",\"unit\":\"C\"}",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_tool_02",
+      "success": true,
+      "expected": "42",
+      "actual": "42",
+      "tokens_used": 1,
+      "wall_time_s": 0.5049883159954334,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "tool temperature 19 C, report number",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "19",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "confirmed operation archive, name only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "archive",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).\n\nPrefer the calculator tool when arithmetic is required.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "calculator 19 + 23 final number",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Final Answer: 42",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_tool_03",
+      "success": true,
+      "expected": "ready",
+      "actual": "ready",
+      "tokens_used": 1,
+      "wall_time_s": 1.2596222110005328,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "tool temperature 19 C, report number",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "19",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "confirmed operation archive, name only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "archive",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).\n\nPrefer the lookup tool.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "lookup status ready, JSON status",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "name=\"lookup\"> name=\"key\">ready",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "<tool_response>\nready\n</tool_response>\nContinue ReAct. Use Final Answer: when done.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Final Answer: ready",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_tool_04",
+      "success": true,
+      "expected": "ops@example.com",
+      "actual": "ops@example.com",
+      "tokens_used": 1,
+      "wall_time_s": 0.3246180770074716,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "tool temperature 19 C, report number",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "19",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "confirmed operation archive, name only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "archive",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).\n\nPrefer the email tool.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "email recipient ops@example.com, output recipient",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "ops@example.com",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_tool_05",
+      "success": true,
+      "expected": "count\\s*[:=]\\s*3",
+      "actual": "count: 3",
+      "tokens_used": 2,
+      "wall_time_s": 0.3327427570038708,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "tool temperature 19 C, report number",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "19",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "confirmed operation archive, name only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "archive",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).\n\nPrefer the search tool.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "search found 3, JSON count 3",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "3",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "P6_REFINED: count: 3",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_tool_06",
+      "success": true,
+      "expected": "Demo",
+      "actual": "Demo",
+      "tokens_used": 1,
+      "wall_time_s": 0.2771663130115485,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "tool temperature 19 C, report number",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "19",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "confirmed operation archive, name only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "archive",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "calendar title Demo, title only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Demo",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_tool_07",
+      "success": false,
+      "expected": "/tmp/report.txt",
+      "actual": "I don't have access to file paths or the ability to retrieve file contents",
+      "tokens_used": 14,
+      "wall_time_s": 2.6822321520012338,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "tool temperature 19 C, report number",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "19",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "confirmed operation archive, name only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "archive",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "file path /tmp/report.txt, return path",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "I don't have access to file paths or the ability to retrieve file contents. I can only help with the tools available to me (weather, lookup, email, search).",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "P6_REFINED: I don't have access to file paths or the ability to retrieve file contents",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_tool_08",
+      "success": true,
+      "expected": "21",
+      "actual": "21",
+      "tokens_used": 1,
+      "wall_time_s": 0.22694190399488434,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "tool temperature 19 C, report number",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "19",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "confirmed operation archive, name only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "archive",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "tool temperature 21 C, report number",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "21",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_tool_09",
+      "success": true,
+      "expected": "delete",
+      "actual": "delete",
+      "tokens_used": 1,
+      "wall_time_s": 0.2259601990081137,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "tool temperature 19 C, report number",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "19",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "confirmed operation archive, name only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "archive",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "confirmed operation delete, name only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "delete",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_tool_10",
+      "success": false,
+      "expected": "alpha,beta",
+      "actual": "beta",
+      "tokens_used": 1,
+      "wall_time_s": 1.9680093279894209,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "tool temperature 19 C, report number",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "19",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "confirmed operation archive, name only",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "archive",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Private local reference passages. Use them to answer the user's request;\ndo not mention this retrieval step, repeat headers, or reveal scratch work.\n[repo/incident.md]\nservice = api\nseverity = high\nThe incident service field names the affected component.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"weather\", \"description\": \"Build a compact weather request JSON for a city and unit.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"C\", \"F\"]}}, \"required\": [\"city\", \"unit\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"lookup\", \"description\": \"Lookup a named status/key from the local table.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}, \"required\": [\"key\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"email\", \"description\": \"Return the email recipient address for a drafted message.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"recipient\": {\"type\": \"string\"}}, \"required\": [\"recipient\"]}}}\n{\"type\": \"function\", \"function\": {\"name\": \"search\", \"description\": \"Return a compact JSON object with a search hit count.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"count\": {\"type\": \"integer\"}}, \"required\": [\"count\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "database rows alpha,beta, both names",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "name=\"lookup\"> name=\"key\">beta",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "<tool_response>\nunknown\n</tool_response>\nContinue ReAct. Use Final Answer: when done.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Final Answer: beta",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_file_01",
+      "success": true,
+      "expected": "8088",
+      "actual": "8088",
+      "tokens_used": 1,
+      "wall_time_s": 0.18784180100192316,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "owners.txt says owner = Ada Lovelace, name?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Ada",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "config.toml port = 9000, what port?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "9000",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Private local reference passages. Use them to answer the user's request;\ndo not mention this retrieval step, repeat headers, or reveal scratch work.\n[repo/config.toml]\n[server]\nport = 8088\nhost = \"127.0.0.1\"",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P3 read-gate: answer ONLY from the private reference passages above. Do not call tools. Emit the bare requested field only.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "config.toml port=8088, what port?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "8088",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_file_02",
+      "success": true,
+      "expected": "3",
+      "actual": "3",
+      "tokens_used": 1,
+      "wall_time_s": 0.13892602699343115,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "owners.txt says owner = Ada Lovelace, name?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Ada",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "config.toml port = 9000, what port?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "9000",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Private local reference passages. Use them to answer the user's request;\ndo not mention this retrieval step, repeat headers, or reveal scratch work.\n[repo/README.md]\nThe worker retries failed jobs 3 times before marking a job failed.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P3 read-gate: answer ONLY from the private reference passages above. Do not call tools. Emit the bare requested field only.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "README worker retries 3, how many?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "3",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_file_03",
+      "success": true,
+      "expected": "Ever",
+      "actual": "Ever",
+      "tokens_used": 1,
+      "wall_time_s": 0.13765479098947253,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "owners.txt says owner = Ada Lovelace, name?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Ada",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "config.toml port = 9000, what port?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "9000",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Private local reference passages. Use them to answer the user's request;\ndo not mention this retrieval step, repeat headers, or reveal scratch work.\n[repo/owners.txt]\nowner = Ever Olivares\nteam = vision-model",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P3 read-gate: answer ONLY from the private reference passages above. Do not call tools. Emit the bare requested field only.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "owners.txt owner Ever, name?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Ever",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_file_04",
+      "success": true,
+      "expected": "1.4.2",
+      "actual": "1.4.2",
+      "tokens_used": 1,
+      "wall_time_s": 0.35797336501127575,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "owners.txt says owner = Ada Lovelace, name?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Ada",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "config.toml port = 9000, what port?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "9000",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Private local reference passages. Use them to answer the user's request;\ndo not mention this retrieval step, repeat headers, or reveal scratch work.\n[repo/CHANGELOG.md]\n## 1.4.2\nThe 1.4.2 release adds deterministic request packing and a safer timeout default.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P3 read-gate: answer ONLY from the private reference passages above. Do not call tools. Emit the bare requested field only.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "changelog version 1.4.2, version?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "1.4.2",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_file_05",
+      "success": true,
+      "expected": "900",
+      "actual": "900",
+      "tokens_used": 1,
+      "wall_time_s": 0.14092197800346185,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "owners.txt says owner = Ada Lovelace, name?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Ada",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "config.toml port = 9000, what port?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "9000",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Private local reference passages. Use them to answer the user's request;\ndo not mention this retrieval step, repeat headers, or reveal scratch work.\n[repo/cache.toml]\nDEFAULT_TTL = 900\nThe cache TTL is measured in seconds.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P3 read-gate: answer ONLY from the private reference passages above. Do not call tools. Emit the bare requested field only.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "cache DEFAULT_TTL=900, value?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "900",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_file_06",
+      "success": true,
+      "expected": "MIT",
+      "actual": "MIT",
+      "tokens_used": 1,
+      "wall_time_s": 0.1394595180026954,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "owners.txt says owner = Ada Lovelace, name?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Ada",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "config.toml port = 9000, what port?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "9000",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Private local reference passages. Use them to answer the user's request;\ndo not mention this retrieval step, repeat headers, or reveal scratch work.\n[repo/manifest.toml]\nlicense = \"MIT\"\npackage = \"harness-ladder\"",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P3 read-gate: answer ONLY from the private reference passages above. Do not call tools. Emit the bare requested field only.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "manifest license MIT, license?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "MIT",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_file_07",
+      "success": true,
+      "expected": "api",
+      "actual": "api",
+      "tokens_used": 1,
+      "wall_time_s": 0.13944953700411133,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "owners.txt says owner = Ada Lovelace, name?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Ada",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "config.toml port = 9000, what port?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "9000",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Private local reference passages. Use them to answer the user's request;\ndo not mention this retrieval step, repeat headers, or reveal scratch work.\n[repo/incident.md]\nservice = api\nseverity = high\nThe incident service field names the affected component.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P3 read-gate: answer ONLY from the private reference passages above. Do not call tools. Emit the bare requested field only.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "incident service api, service?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "api",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_file_08",
+      "success": true,
+      "expected": "us-east-1",
+      "actual": "us-east-1",
+      "tokens_used": 1,
+      "wall_time_s": 0.27975317400705535,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "owners.txt says owner = Ada Lovelace, name?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Ada",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "config.toml port = 9000, what port?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "9000",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Private local reference passages. Use them to answer the user's request;\ndo not mention this retrieval step, repeat headers, or reveal scratch work.\n[repo/launch.yaml]\nregion: us-east-1\nreplicas: 2",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P3 read-gate: answer ONLY from the private reference passages above. Do not call tools. Emit the bare requested field only.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "launch region us-east-1, region?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "us-east-1",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_file_09",
+      "success": true,
+      "expected": "maple",
+      "actual": "maple",
+      "tokens_used": 1,
+      "wall_time_s": 0.7212007299967809,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "owners.txt says owner = Ada Lovelace, name?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Ada",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "config.toml port = 9000, what port?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "9000",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Private local reference passages. Use them to answer the user's request;\ndo not mention this retrieval step, repeat headers, or reveal scratch work.\n[repo/trees.txt]\ncedar\nmaple\nbirch",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P3 read-gate: answer ONLY from the private reference passages above. Do not call tools. Emit the bare requested field only.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "rows cedar,maple,birch, second?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "cedar,maple,birch",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "P6_REFINED: maple",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_file_10",
+      "success": true,
+      "expected": "4",
+      "actual": "4",
+      "tokens_used": 1,
+      "wall_time_s": 0.16074853800819255,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "owners.txt says owner = Ada Lovelace, name?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Ada",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "config.toml port = 9000, what port?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "9000",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Private local reference passages. Use them to answer the user's request;\ndo not mention this retrieval step, repeat headers, or reveal scratch work.\n[repo/settings.toml]\nworkers = 4\nqueue = \"default\"",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P3 read-gate: answer ONLY from the private reference passages above. Do not call tools. Emit the bare requested field only.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "settings workers=4, how many?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "4",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_long_horizon_01",
+      "success": true,
+      "expected": "9",
+      "actual": "9",
+      "tokens_used": 1,
+      "wall_time_s": 1.633815313995001,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Plan-once (small-model harness): for multi-step arithmetic, write ONE calculator expression that covers every step, then Final Answer with the bare number. Do not stop after the first partial hop.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "visit X then Y then Z, last?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Z",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "start 2, double, add 1, final?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).\n\nPrefer one calculator expression covering every step, then Final Answer.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Long-horizon tool gate: you MUST call calculator before Final Answer. Use this full expression in one call: ((5*2)+3)-4. Do not emit a bare number first.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "start 5, double, add 3, subtract 4, final?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "name=\"calculator\"> name=\"expression\">((5*2)+3)-4",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "<tool_response>\n9\n</tool_response>\nContinue ReAct. Use Final Answer: when done.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Final Answer: 9",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_long_horizon_02",
+      "success": true,
+      "expected": "9",
+      "actual": "9",
+      "tokens_used": 1,
+      "wall_time_s": 1.3812976210028864,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Plan-once (small-model harness): for multi-step arithmetic, write ONE calculator expression that covers every step, then Final Answer with the bare number. Do not stop after the first partial hop.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "visit X then Y then Z, last?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Z",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "start 2, double, add 1, final?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).\n\nPrefer one calculator expression covering every step, then Final Answer.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Long-horizon tool gate: you MUST call calculator before Final Answer. Use this full expression in one call: (2*6)-3. Do not emit a bare number first.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "2 packs of 6, use 3, remain?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "name=\"calculator\"> name=\"expression\">(2*6)-3",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "<tool_response>\n9\n</tool_response>\nContinue ReAct. Use Final Answer: when done.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Final Answer: 9",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_long_horizon_03",
+      "success": true,
+      "expected": "14",
+      "actual": "14",
+      "tokens_used": 1,
+      "wall_time_s": 2.9667313279933296,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Plan-once (small-model harness): for multi-step arithmetic, write ONE calculator expression that covers every step, then Final Answer with the bare number. Do not stop after the first partial hop.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "visit X then Y then Z, last?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Z",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "start 2, double, add 1, final?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).\n\nPrefer one calculator expression covering every step, then Final Answer.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Long-horizon tool gate: you MUST call calculator before Final Answer. Use this full expression in one call: 4+10. Do not emit a bare number first.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "add 10 to 1,2,3,4, last result?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "name=\"calculator\"> name=\"expression\">1+2+3+4+10",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "<tool_response>\n20\n</tool_response>\nContinue ReAct. Use Final Answer: when done.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Final Answer: 20",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "<tool_response>\nError: calculator required. Call <function name=\"calculator\"><param name=\"expression\">4+10</param></function>\n</tool_response>\nContinue ReAct. Use Final Answer: when done.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "name=\"calculator\"> name=\"expression\">4+10",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "<tool_response>\n14\n</tool_response>\nContinue ReAct. Use Final Answer: when done.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Final Answer: 14",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_long_horizon_04",
+      "success": true,
+      "expected": "C",
+      "actual": "C",
+      "tokens_used": 1,
+      "wall_time_s": 0.11900615300692152,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Plan-once (small-model harness): for multi-step arithmetic, write ONE calculator expression that covers every step, then Final Answer with the bare number. Do not stop after the first partial hop.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "visit X then Y then Z, last?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Z",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "start 2, double, add 1, final?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "visit A then B then C, last?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "C",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_long_horizon_05",
+      "success": true,
+      "expected": "htron",
+      "actual": "htron",
+      "tokens_used": 1,
+      "wall_time_s": 0.21884779899846762,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Plan-once (small-model harness): for multi-step arithmetic, write ONE calculator expression that covers every step, then Final Answer with the bare number. Do not stop after the first partial hop.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "visit X then Y then Z, last?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Z",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "start 2, double, add 1, final?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "reverse north",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "south",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "P6_REFINED: htron",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_long_horizon_06",
+      "success": true,
+      "expected": "ROB",
+      "actual": "ROB",
+      "tokens_used": 1,
+      "wall_time_s": 0.23533186998974998,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Plan-once (small-model harness): for multi-step arithmetic, write ONE calculator expression that covers every step, then Final Answer with the bare number. Do not stop after the first partial hop.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "visit X then Y then Z, last?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Z",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "start 2, double, add 1, final?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "first letters red orange blue",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "red",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "P6_REFINED: ROB",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_long_horizon_07",
+      "success": true,
+      "expected": "4",
+      "actual": "4",
+      "tokens_used": 1,
+      "wall_time_s": 1.5739238980022492,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Plan-once (small-model harness): for multi-step arithmetic, write ONE calculator expression that covers every step, then Final Answer with the bare number. Do not stop after the first partial hop.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "visit X then Y then Z, last?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Z",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "start 2, double, add 1, final?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Private local reference passages. Use them to answer the user's request;\ndo not mention this retrieval step, repeat headers, or reveal scratch work.\n[repo/README.md]\nThe worker retries failed jobs 3 times before marking a job failed.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "# Tools\n\nYou are provided with function signatures within XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"calculator\", \"description\": \"Evaluate a simple arithmetic expression and return the number.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"expression\": {\"type\": \"string\"}}, \"required\": [\"expression\"]}}}\n</tools>\n\nTool usage guidelines:\n- You may call zero or more functions. If no function calls are needed, just answer normally and do not include any.\n- When calling a function, return an XML object using:\n  <function name=\"tool_name\"><param name=\"param\">value</param></function>\n- After a tool result is provided, emit only the final answer (no XML).\n\nPrefer the calculator tool when arithmetic is required.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Long-horizon tool gate: you MUST call calculator before Final Answer. Use this full expression in one call: ((4+4)*2)/4. Do not emit a bare number first.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "4+4, times 2, divided by 4?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "name=\"calculator\"> name=\"expression\">((4+4)*2)/4",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "<tool_response>\n4\n</tool_response>\nContinue ReAct. Use Final Answer: when done.",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Final Answer: 4",
+          "name": null
+        }
+      ]
+    },
+    {
+      "task_id": "v1_long_horizon_08",
+      "success": true,
+      "expected": "SUMMER",
+      "actual": "SUMMER",
+      "tokens_used": 1,
+      "wall_time_s": 0.21224091500334907,
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Follow instructions precisely.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "P5 ReAct protocol (budget ~32 tokens of private thought per step):\n1. Optionally write one short line: Thought: <plan>\n2. Either call a tool with MiniCPM XML <function name=\"tool\"><param name=\"k\">v</param></function>\n   or finish with: Final Answer: <answer only>\n3. After a <tool_response>, think again or give Final Answer.\nDo not invent tool results. Prefer tools for arithmetic, weather, lookup, email, search.",
+          "name": null
+        },
+        {
+          "role": "system",
+          "content": "Plan-once (small-model harness): for multi-step arithmetic, write ONE calculator expression that covers every step, then Final Answer with the bare number. Do not stop after the first partial hop.",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "visit X then Y then Z, last?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "Z",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "start 2, double, add 1, final?",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "5",
+          "name": null
+        },
+        {
+          "role": "user",
+          "content": "one word uppercase, season after spring",
+          "name": null
+        },
+        {
+          "role": "assistant",
+          "content": "SUMMER",
+          "name": null
+        }
+      ]
+    }
+  ]
+}

@@ -115,14 +115,15 @@ Mitigations: category-matched few-shots, category tool filters + file read-gate,
 
 ## Evaluation — suite_v1 (48 tasks)
 
-Chart: P0 **6.3%** → P8 **100%** (+93.7 pp) on fixed `openbmb/MiniCPM5-2B` weights.
-
-Same MiniCPM5-2B weights; cumulative harness. Mini suite (24) hit 100% at P8; this is the harder ruler.
+Chart: P0 **6.3%** → P2 **72.9%** → P4 **75.0%** → P6 **95.8%** → P8 **100%** on fixed `openbmb/MiniCPM5-2B` weights.
 
 | Suite / rung | Passed | Score | Notes |
 |---|---:|---:|---|
 | suite_v1 / P0 | 3/48 | 6.3% | bare loop |
-| suite_v1 / P8 | 48/48 | **100%** | P7 number-lock (`77b038a`); `p8_real_minicpm5_suite_v1_fix3.json` |
+| suite_v1 / P2 | 35/48 | 72.9% | few-shot + budgeted thinking |
+| suite_v1 / P4 | 36/48 | 75.0% | + tools / ReAct path |
+| suite_v1 / P6 | 46/48 | 95.8% | + self-refine |
+| suite_v1 / P8 | 48/48 | **100%** | + Reflexion + gated REPL; `p8_real_minicpm5_suite_v1_fix3.json` |
 
 suite_v1 P8 saturated at **48/48 (100%)** (same MiniCPM5-2B weights; harness-only climb from P0 6.3%).
 
