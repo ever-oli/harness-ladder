@@ -120,7 +120,7 @@ Same MiniCPM5-2B weights; cumulative harness. Mini suite (24) hit 100% at P8; th
 | Suite / rung | Passed | Score | Notes |
 |---|---:|---:|---|
 | suite_v1 / P0 | 3/48 | 6.3% | bare loop |
-| suite_v1 / P8 | 40/48 | **83.3%** | +77.1 pp vs P0; results/runs/p8_real_minicpm5_suite_v1.json |
+| suite_v1 / P8 | 44/48 | **91.7%** | fail-chip re-eval (`3a26c2f`); `p8_real_minicpm5_suite_v1_fix.json` |
 
-P8 misses on suite_v1: `code_08`, `code_10`, `tool_08`–`10`, `file_09`, `long_horizon_05`–`06` (append/SQL/tools/list/reverse/acrostic).
+Remaining P8 misses: `code_07`, `tool_10`, `long_horizon_05`, `long_horizon_07`.
 
