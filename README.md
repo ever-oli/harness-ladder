@@ -113,6 +113,14 @@ Mitigations: category-matched few-shots, category tool filters + file read-gate,
 
 **Cleared:** `long_horizon_01`/`03` fixed by forced full-expression calculator gate → mini suite **24/24**.
 
-## Suite expansion
+## Evaluation — suite_v1 (48 tasks)
 
-After mini-suite 24/24, measuring on `tasks/suite_v1.json` (48 tasks). Corpus expanded for new file-grounded items.
+Same MiniCPM5-2B weights; cumulative harness. Mini suite (24) hit 100% at P8; this is the harder ruler.
+
+| Suite / rung | Passed | Score | Notes |
+|---|---:|---:|---|
+| suite_v1 / P0 | 3/48 | 6.3% | bare loop |
+| suite_v1 / P8 | 40/48 | **83.3%** | +77.1 pp vs P0; results/runs/p8_real_minicpm5_suite_v1.json |
+
+P8 misses on suite_v1: `code_08`, `code_10`, `tool_08`–`10`, `file_09`, `long_horizon_05`–`06` (append/SQL/tools/list/reverse/acrostic).
+
